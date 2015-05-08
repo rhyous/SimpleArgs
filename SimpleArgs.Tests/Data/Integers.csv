@@ -1,0 +1,8 @@
+Value, Message
+2147483647, int.MaxValue
+-2147483648, int.MinValue
+0, 0 (zero)
+1, 1 (one)
+2, 2 (one)
+-1, -1 (minus one)
+-2, -2 (minus one)

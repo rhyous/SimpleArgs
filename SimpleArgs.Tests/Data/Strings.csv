@@ -1,0 +1,8 @@
+Value, Message
+"one", a named number "one"
+null, A null value
+"", An Empty value "" or string.Empty
+"   ", white space
+"   ", white space
+"%^&)*YU:LKW)#$ #;ldk'aps 3-203o-[ a;'slekrq03w", Garbage text
+ŶĵÜޘঊ, Unicode foreign characters

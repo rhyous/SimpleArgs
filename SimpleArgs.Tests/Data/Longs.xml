@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rows xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:x="urn:Row">
+  <!-- Schema -->
+  <xsd:schema targetNamespace="urn:Row" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+    <xsd:element name="Row">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element type="xsd:long" name="Value"/>
+          <xsd:element type="xsd:string" name="Message"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <!--End Schema-->
+  <x:Row>
+    <x:Value>2147483648</x:Value>
+    <x:Message>One more than int.MaxValue</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>-2147483649</x:Value>
+    <x:Message>One less than int.MinValue</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>9223372036854775807</x:Value>
+    <x:Message>long.MaxValue</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>-9223372036854775808</x:Value>
+    <x:Message>long.MinValue</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>0</x:Value>
+    <x:Message>0 (zero)</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>1</x:Value>
+    <x:Message>1 (one)</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>2</x:Value>
+    <x:Message>2 (one)</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>-1</x:Value>
+    <x:Message>-1 (minus one)</x:Message>
+  </x:Row>
+  <x:Row>
+    <x:Value>-2</x:Value>
+    <x:Message>-2, -2 (minus one)</x:Message>
+  </x:Row>
+</Rows>
