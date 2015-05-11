@@ -10,6 +10,13 @@ namespace SimpleArgs
     public class Argument
     {
         /// <summary>
+        /// If sequence Id is not 0, then the argument sequence must match.
+        /// For example, if SequenceId is 1, then this argument must be the
+        /// first argument.
+        /// </summary>
+        public int SequenceId { get; set; }
+
+        /// <summary>
         /// In a command line argument such as this:
         /// FirstName=John
         /// Name is "FirstName".

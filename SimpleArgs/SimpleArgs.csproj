@@ -51,7 +51,7 @@
     <Compile Include="Extensions\ArgumentExtensions.cs" />
     <Compile Include="ArgumentList.cs" />
     <Compile Include="CommonAllowedValues.cs" />
-    <Compile Include="Handlers\ArgsHanderCollection.cs" />
+    <Compile Include="Handlers\ArgsHandlerCollection.cs" />
     <Compile Include="Handlers\IArgumentHandler.cs" />
     <Compile Include="IReadArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

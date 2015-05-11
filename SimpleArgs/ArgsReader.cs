@@ -93,12 +93,12 @@ namespace SimpleArgs
             {
                 ExitWithInvalidParams();
             }
+            int sequence = 1;
             foreach (string arg in inArgs)
             {
                 string key;
                 string value;
                 GetArgumentPropertyValue(arg, out key, out value);
-                bool foundArg = false;
                 if (!ArgumentDictionary.ContainsKey(key) || ArgumentDictionary[key] == null)
                 {
                     if (!IgnoreUnknownParams)
@@ -106,8 +106,11 @@ namespace SimpleArgs
                 }
                 else
                 {
+                    if (ArgumentDictionary[key].SequenceId != 0 && sequence != ArgumentDictionary[key].SequenceId)
+                        ExitWithInvalidParams();
                     ArgumentDictionary[key].Value = value;
                 }
+                sequence++;
             }
         }
 

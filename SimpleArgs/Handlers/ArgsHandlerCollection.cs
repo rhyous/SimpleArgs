@@ -1,23 +1,38 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace SimpleArgs.Handlers
 {
-    public interface IArgumentHandler
+    public class ArgsHandlerCollection : List<IArgumentHandler>
     {
-        /// <summary>
-        /// The list of args this handler handles
-        /// </summary>
-        List<Argument> Args { get; set; }
+        #region Constructor and Singleton
+        private ArgsHandlerCollection()
+        {
+        }
 
-        /// <summary>
-        /// The action to take when handling args.
-        /// If take no action then leave empty.
-        /// </summary>
-        /// <param name="inArgsHandler"></param>
-        void HandleArgs(IReadArgs inArgsHandler);
+        public static ArgsHandlerCollection Instance
+        {
+            get { return _Instance ?? (_Instance = new ArgsHandlerCollection()); }
+            set { _Instance = value; }
+        } private static ArgsHandlerCollection _Instance;
+        #endregion
 
-        bool Handled { get; set; }
+        new public void Add(IArgumentHandler inArgsHandler)
+        {
+            base.Add(inArgsHandler);
+            foreach (var arg in inArgsHandler.Args)
+            {
+                ArgumentList.Instance.Args.Add(arg);
+            }
+        }
+
+        public void HandleArgs(IReadArgs argsReader)
+        {
+            foreach (var handler in this)
+            {
+                if (!handler.Handled)
+                    handler.HandleArgs(argsReader);
+            }
+        }
     }
 }
 
