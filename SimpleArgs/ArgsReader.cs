@@ -95,19 +95,18 @@ namespace SimpleArgs
             }
             foreach (string arg in inArgs)
             {
-                string property;
+                string key;
                 string value;
-                GetArgumentPropertyValue(arg, out property, out value);
+                GetArgumentPropertyValue(arg, out key, out value);
                 bool foundArg = false;
-                var argMatch = ArgumentDictionary.SingleOrDefault(pair => property.Equals(pair.Key, StringComparison.OrdinalIgnoreCase));
-                if (argMatch.Key == null)
+                if (!ArgumentDictionary.ContainsKey(key) || ArgumentDictionary[key] == null)
                 {
                     if (!IgnoreUnknownParams)
                         ExitWithInvalidParams();
                 }
                 else
                 {
-                    ArgumentDictionary[argMatch.Key].Value = value;
+                    ArgumentDictionary[key].Value = value;
                 }
             }
         }
