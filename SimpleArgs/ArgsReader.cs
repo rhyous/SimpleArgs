@@ -93,22 +93,24 @@ namespace SimpleArgs
             {
                 ExitWithInvalidParams();
             }
+            int sequence = 1;
             foreach (string arg in inArgs)
             {
-                string property;
+                string key;
                 string value;
-                GetArgumentPropertyValue(arg, out property, out value);
-                bool foundArg = false;
-                var argMatch = ArgumentDictionary.SingleOrDefault(pair => property.Equals(pair.Key, StringComparison.OrdinalIgnoreCase));
-                if (argMatch.Key == null)
+                GetArgumentPropertyValue(arg, out key, out value);
+                if (!ArgumentDictionary.ContainsKey(key) || ArgumentDictionary[key] == null)
                 {
                     if (!IgnoreUnknownParams)
                         ExitWithInvalidParams();
                 }
                 else
                 {
-                    ArgumentDictionary[argMatch.Key].Value = value;
+                    if (ArgumentDictionary[key].SequenceId != 0 && sequence != ArgumentDictionary[key].SequenceId)
+                        ExitWithInvalidParams();
+                    ArgumentDictionary[key].Value = value;
                 }
+                sequence++;
             }
         }
 

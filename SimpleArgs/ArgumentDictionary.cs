@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 
 namespace SimpleArgs
 {
     public class ArgumentDictionary : Dictionary<string, Argument>
     {
-        private readonly Dictionary<string, Argument> _ShortNameDictionary = new Dictionary<string, Argument>();
+        private readonly Dictionary<string, Argument> _ShortNameDictionary = new Dictionary<string, Argument>(StringComparer.OrdinalIgnoreCase);
         /// <summary>
         /// Argument dictionary default constructor. Key ignores case by default.
         /// </summary>
@@ -57,9 +56,18 @@ namespace SimpleArgs
         {
             get
             {
-                var value = base[key] ?? _ShortNameDictionary[key];
-                return value;
+                Argument value;
+                if (TryGetValue(key, out value))
+                    return value;
+                if (_ShortNameDictionary.TryGetValue(key, out value))
+                    return value;
+                return null;
             }
+        }
+
+        public new bool ContainsKey(string inKeyNameOrShortName)
+        {
+            return base.ContainsKey(inKeyNameOrShortName) || _ShortNameDictionary.ContainsKey(inKeyNameOrShortName);
         }
     }
 }
