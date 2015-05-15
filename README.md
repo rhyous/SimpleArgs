@@ -8,7 +8,7 @@ A project that makes it easier to add command line arguments to applications.
   install-package SimpleArgs
   ```
 2. Add your new Arguments to the contructor of the ArgsHandler.cs file.
-```
+  ```
   public ArgsHandler()
   {
       Args = new List<Argument>
@@ -24,7 +24,7 @@ A project that makes it easier to add command line arguments to applications.
           // Add more args here
       };
   }
-```
+  ```
 3. In Program.cs add this line of code to Main()
 ```
   static void Main(string[] args)
