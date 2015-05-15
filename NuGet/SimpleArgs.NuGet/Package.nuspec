@@ -8,7 +8,7 @@
     <owners>Jared Barneck (Rhyous)</owners>
     <description>Easy coding of command line arguments.</description>
     <releaseNotes></releaseNotes>
-    <summary>Easy coding of command line arguments. Create an arguments handler class, where you describe your argujents using a simple poco objects. All the boilerplate code to create the usage message is done for you. You can take action on argument value set or take action after all arguments are set.</summary>
+    <summary>Quickly handle command line arguments. NuGet packages adds an example arguments handler class, where you describe your arguments using a simple poco objects. All the boilerplate code to create the usage message is done for you. You can take action on set or after all arguments are set.</summary>
     <language>en-US</language>
     <projectUrl>https://github.com/rhyous/SimpleArgs</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/rhyous/SimpleArgs/master/Docs/Images/SimpleArgs.Logo.png</iconUrl>
