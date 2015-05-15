@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleArgs", "SimpleArgs\SimpleArgs.csproj", "{280FD5FB-C77C-48AC-BFB1-39964DF61775}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{31472C
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleArgs.Example", "SimpleArgs.Example\SimpleArgs.Example.csproj", "{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{2FEC582F-92D7-4538-B917-D3B9D4DC688B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FEC582F-92D7-4538-B917-D3B9D4DC688B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FEC582F-92D7-4538-B917-D3B9D4DC688B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
