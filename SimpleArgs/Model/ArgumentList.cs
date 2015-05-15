@@ -1,13 +1,66 @@
 ﻿namespace SimpleArgs
 {
-    public static class ArgumentExtensions
+    /// <summary>
+    /// This is a singleton for handling command line arguments. The values
+    /// created here are passed into the ArgsHandler object.
+    /// </summary>
+    public sealed class ArgumentList
     {
-        public static bool IsEnabled(this Argument argument)
+        #region Constructor and Singleton Instance
+        /// <summary>
+        /// The private constructor. The constructor is private because only
+        /// one object should be created using the Instance property.
+        /// </summary>
+        private ArgumentList()
         {
-            return argument.Value.AsBool();
+            Init();
         }
+
+        /// <summary>
+        /// The singleton instance.
+        /// </summary>
+        public static ArgumentList Instance
+        {
+            get { return _Instance ?? (_Instance = new ArgumentList()); }
+        } private static ArgumentList _Instance;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// The list of arguments this application supports.
+        /// </summary>
+        public ArgumentDictionary Args { get; set; }
+
+        /// <summary>
+        /// The message that is seen when a user runs the exe with /?
+        /// </summary>
+        public string Message { get; set; }
+        #endregion
+
+        #region Methods
+        private void Init()
+        {
+            Args = new ArgumentDictionary();
+            Args.ArgumentAdded += OnArgumentAdded;
+            CreateMessage();
+        }
+
+        void OnArgumentAdded(object sender, ArgumentAddedEventArgs e)
+        {
+            Message = ArgumentMessageBuilder.Instance.CreateMessage(Args);
+        }
+
+        /// <summary>
+        /// A method to create the message that is seen when a user runs the exe with /?
+        /// </summary>
+        public void CreateMessage()
+        {
+
+        }
+        #endregion
     }
 }
+
 #region Fork and Contribute License
 /*
 SimpleArgs - Easy coding of command line arguments.

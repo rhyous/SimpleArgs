@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
-namespace SimpleArgs.Extensions
+namespace SimpleArgs
 {
     public static class StringExtensions
     {

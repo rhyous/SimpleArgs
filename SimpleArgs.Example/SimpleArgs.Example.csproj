@@ -4,20 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{280FD5FB-C77C-48AC-BFB1-39964DF61775}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleArgs</RootNamespace>
-    <AssemblyName>SimpleArgs</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>SimpleArgs.Example</RootNamespace>
+    <AssemblyName>SimpleArgs.Example</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,26 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\ArgsManager.cs" />
-    <Compile Include="Business\ArgsReader.cs" />
-    <Compile Include="Model\ArgsHanderBase.cs" />
-    <Compile Include="Model\Argument.cs" />
-    <Compile Include="Model\ArgumentAddedEventArgs.cs" />
-    <Compile Include="Model\ArgumentDictionary.cs" />
-    <Compile Include="Business\ArgumentMessageBuilder.cs" />
-    <Compile Include="Extensions\ArgumentExtensions.cs" />
-    <Compile Include="Model\ArgumentList.cs" />
-    <Compile Include="Business\CommonAllowedValues.cs" />
-    <Compile Include="Business\ArgsHandlerCollection.cs" />
-    <Compile Include="Interfaces\IArgumentHandler.cs" />
-    <Compile Include="Interfaces\IReadArgs.cs" />
+    <Compile Include="Arguments\ArgsHandler.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleArgs\SimpleArgs.csproj">
+      <Project>{280fd5fb-c77c-48ac-bfb1-39964df61775}</Project>
+      <Name>SimpleArgs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetPath)" "$(ProjectDir)..\NuGet\SimpleArgs.NuGet\lib\net40-client\"</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -37,6 +37,8 @@ namespace SimpleArgs
         /// <summary>
         /// This is to hide this method so Add(Argument inArgument) is used instead.
         /// </summary>
+        // ReSharper disable once UnusedMember.Local
+        // ReSharper disable UnusedParameter.Local
         new private void Add(string property, Argument inArgument)
         {
             throw new NotSupportedException("Use this method instead: Add(Argument inArgument).");

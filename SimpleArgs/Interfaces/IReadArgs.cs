@@ -1,68 +1,52 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Text;
-
-namespace SimpleArgs
+﻿namespace SimpleArgs
 {
     /// <summary>
-    /// This is a singleton for handling command line arguments. The values
-    /// created here are passed into the ArgsHandler object.
+    /// An interface to use throught your code when calling a concrete 
+    /// ArgsHandler object. By using this interface instead of the
+    /// concrete args handler object, your code allows for dependency
+    /// injection or inversion of control. Essentally a fake, mock, or
+    /// a replacement module can implement this interface when needed.
     /// </summary>
-    public sealed class ArgumentList
+    public interface IReadArgs
     {
-        #region Constructor and Singleton Instance
         /// <summary>
-        /// The private constructor. The constructor is private because only
-        /// one object should be created using the Instance property.
+        /// The list of supported command line arguments. This should 
+        /// also be identical to PropertyValueArgs.Keys.
         /// </summary>
-        private ArgumentList()
-        {
-            Init();
-        }
+        string[] Args { get; set; }
 
         /// <summary>
-        /// The singleton instance.
+        /// The message displayed when a user runs a command with /?
         /// </summary>
-        public static ArgumentList Instance
-        {
-            get { return _Instance ?? (_Instance = new ArgumentList()); }
-        } private static ArgumentList _Instance;
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// The list of arguments this application supports.
-        /// </summary>
-        public ArgumentDictionary Args { get; set; }
+        string Message { get; set; }
 
         /// <summary>
-        /// The message that is seen when a user runs the exe with /?
+        /// The method that parses the command line arguments.
         /// </summary>
-        public string Message { get; set; }
-        #endregion
-
-        #region Methods
-        private void Init()
-        {
-            Args = new ArgumentDictionary();
-            Args.ArgumentAdded += OnArgumentAdded;
-            CreateMessage();
-        }
-
-        void OnArgumentAdded(object sender, ArgumentAddedEventArgs e)
-        {
-            Message = ArgumentMessageBuilder.Instance.CreateMessage(Args);
-        }
+        /// <param name="inArgs"></param>
+        void ParseArgs(string[] inArgs);
 
         /// <summary>
-        /// A method to create the message that is seen when a user runs the exe with /?
+        /// A dictionary for storing the values of the arguments.
+        /// You can store default values or null initially and 
+        /// then add values that are passed in.
         /// </summary>
-        public void CreateMessage()
-        {
+        ArgumentDictionary ArgumentDictionary { get; }
 
-        }
-        #endregion
+        /// <summary>
+        /// An indexer for acccessing the argument object
+        /// by calling this class as follows: 
+        /// myArgsHander[MyArgName]
+        /// </summary>
+        /// <param name="argName"></param>
+        /// <returns>The Argument object.</returns>
+        Argument this[string argName] { get; }
+
+        /// <summary>
+        /// This method should print the Message string to the 
+        /// command line.
+        /// </summary>
+        void PrintUsage();
     }
 }
 

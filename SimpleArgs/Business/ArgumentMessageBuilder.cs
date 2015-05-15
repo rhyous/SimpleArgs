@@ -1,54 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace SimpleArgs
 {
-    /// <summary>
-    /// An interface to use throught your code when calling a concrete 
-    /// ArgsHandler object. By using this interface instead of the
-    /// concrete args handler object, your code allows for dependency
-    /// injection or inversion of control. Essentally a fake, mock, or
-    /// a replacement module can implement this interface when needed.
-    /// </summary>
-    public interface IReadArgs
+    public class ArgumentMessageBuilder
     {
-        /// <summary>
-        /// The list of supported command line arguments. This should 
-        /// also be identical to PropertyValueArgs.Keys.
-        /// </summary>
-        string[] Args { get; set; }
+        public static ArgumentMessageBuilder Instance
+        {
+            get { return _Instance ?? (_Instance = new ArgumentMessageBuilder()); }
+        } private static ArgumentMessageBuilder _Instance;
 
-        /// <summary>
-        /// The message displayed when a user runs a command with /?
-        /// </summary>
-        string Message { get; set; }
+        private ArgumentMessageBuilder()
+        {
+        }
 
-        /// <summary>
-        /// The method that parses the command line arguments.
-        /// </summary>
-        /// <param name="inArgs"></param>
-        void ParseArgs(string[] inArgs);
+        public string CreateMessage(ArgumentDictionary args)
+        {
+            string exeName = Path.GetFileName(Assembly.GetEntryAssembly().Location);
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Usage:" + Environment.NewLine);
+            builder.Append("  " + exeName);
+            foreach (var pair in args)
+            {
+                builder.Append(pair.Value.IsRequired ? string.Format(" [{0}]", pair.Value.Example) : string.Format(" {0}", pair.Value.Example));
+            }
+            builder.Append(Environment.NewLine);
+            foreach (var pair in args)
+            {
+                string optionalOrRequired = pair.Value.IsRequired ? "Required" : "Optional";
+                builder.Append(string.Format("  {0}\t{1} ({2}) {3} {4}", pair.Key, pair.Value.Value, optionalOrRequired, pair.Value.Description, Environment.NewLine));
+            }
 
-        /// <summary>
-        /// A dictionary for storing the values of the arguments.
-        /// You can store default values or null initially and 
-        /// then add values that are passed in.
-        /// </summary>
-        ArgumentDictionary ArgumentDictionary { get; }
-
-        /// <summary>
-        /// An indexer for acccessing the argument object
-        /// by calling this class as follows: 
-        /// myArgsHander[MyArgName]
-        /// </summary>
-        /// <param name="argName"></param>
-        /// <returns>The Argument object.</returns>
-        Argument this[string argName] { get; }
-
-        /// <summary>
-        /// This method should print the Message string to the 
-        /// command line.
-        /// </summary>
-        void PrintUsage();
+            return builder.ToString();
+        }
     }
 }
 

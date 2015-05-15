@@ -1,13 +1,25 @@
-﻿namespace SimpleArgs
+﻿using System.Collections.Generic;
+
+namespace SimpleArgs
 {
-    public static class ArgumentExtensions
+    public interface IArgumentHandler
     {
-        public static bool IsEnabled(this Argument argument)
-        {
-            return argument.Value.AsBool();
-        }
+        /// <summary>
+        /// The list of args this handler handles
+        /// </summary>
+        List<Argument> Args { get; set; }
+
+        /// <summary>
+        /// The action to take when handling args.
+        /// If take no action then leave empty.
+        /// </summary>
+        /// <param name="inArgsHandler"></param>
+        void HandleArgs(IReadArgs inArgsHandler);
+
+        bool Handled { get; set; }
     }
 }
+
 #region Fork and Contribute License
 /*
 SimpleArgs - Easy coding of command line arguments.

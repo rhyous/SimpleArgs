@@ -1,38 +1,37 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Text;
+﻿using System.Collections.Generic;
+
 namespace SimpleArgs
 {
-    public class ArgumentMessageBuilder
+    public class ArgsHandlerCollection : List<IArgumentHandler>
     {
-        public static ArgumentMessageBuilder Instance
-        {
-            get { return _Instance ?? (_Instance = new ArgumentMessageBuilder()); }
-        } private static ArgumentMessageBuilder _Instance;
-
-        private ArgumentMessageBuilder()
+        #region Constructor and Singleton
+        private ArgsHandlerCollection()
         {
         }
 
-        public string CreateMessage(ArgumentDictionary args)
+        public static ArgsHandlerCollection Instance
         {
-            string exeName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Usage:" + Environment.NewLine);
-            builder.Append("  " + exeName);
-            foreach (var pair in args)
-            {
-                builder.Append(pair.Value.IsRequired ? string.Format(" [{0}]", pair.Value.Example) : string.Format(" {0}", pair.Value.Example));
-            }
-            builder.Append(Environment.NewLine);
-            foreach (var pair in args)
-            {
-                string optionalOrRequired = pair.Value.IsRequired ? "Required" : "Optional";
-                builder.Append(string.Format("  {0}\t{1} ({2}) {3} {4}", pair.Key, pair.Value.Value, optionalOrRequired, pair.Value.Description, Environment.NewLine));
-            }
+            get { return _Instance ?? (_Instance = new ArgsHandlerCollection()); }
+            set { _Instance = value; }
+        } private static ArgsHandlerCollection _Instance;
+        #endregion
 
-            return builder.ToString();
+        new public void Add(IArgumentHandler inArgsHandler)
+        {
+            base.Add(inArgsHandler);
+            foreach (var arg in inArgsHandler.Args)
+            {
+                ArgumentList.Instance.Args.Add(arg);
+            }
+        }
+
+        public void HandleArgs(IReadArgs argsReader)
+        {
+            foreach (var handler in this)
+            {
+                if (!handler.Handled)
+                    handler.HandleArgs(argsReader);
+            }
         }
     }
 }

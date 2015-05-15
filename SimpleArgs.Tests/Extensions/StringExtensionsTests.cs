@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SimpleArgs.Extensions;
 using SimpleArgs.Tests.MsTestHelpers;
 
 namespace SimpleArgs.Tests.Extensions

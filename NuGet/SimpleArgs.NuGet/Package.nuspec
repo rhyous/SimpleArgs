@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SimpleArgs</id>
+    <version>1.0.0</version>
+    <title>SimpleArgs</title>
+    <authors>Jared Barneck (Rhyous)</authors>
+    <owners>Jared Barneck (Rhyous)</owners>
+    <description>Easy coding of command line arguments.</description>
+    <releaseNotes></releaseNotes>
+    <summary>Easy coding of command line arguments. Create an arguments handler class, where you describe your argujents using a simple poco objects. All the boilerplate code to create the usage message is done for you. You can take action on argument value set or take action after all arguments are set.</summary>
+    <language>en-US</language>
+    <projectUrl>https://github.com/rhyous/SimpleArgs</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/rhyous/SimpleArgs/master/Docs/Images/SimpleArgs.Logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/rhyous/SimpleArgs/blob/master/Fork%20and%20Contribute%20License.txt</licenseUrl>
+    <copyright>Copyright Jared Barneck (Rhyous) 2015</copyright>
+    <references></references>
+    <tags>command line arguments parameters</tags>
+  </metadata>
+  <files>
+    <file src="lib\" target="lib" />
+    <file src="tools\" target="tools" />
+    <file src="content\" target="content" />
+  </files>
+</package>
