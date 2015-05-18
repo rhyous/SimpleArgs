@@ -8,7 +8,7 @@ namespace SimpleArgs
 
         public bool Handled { get; set; }
 
-        public void HandleArgs(IReadArgs inArgsHandler)
+        public virtual void HandleArgs(IReadArgs inArgsHandler)
         {
             Handled = true;
         }
