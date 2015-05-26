@@ -31,7 +31,7 @@ namespace $rootnamespace$.Arguments
             };
         }
 
-        public void HandleArgs(IReadArgs inArgsHandler)
+        public override void HandleArgs(IReadArgs inArgsHandler)
         {
             Handled = true;
             Console.WriteLine("I handled the args!!!");
