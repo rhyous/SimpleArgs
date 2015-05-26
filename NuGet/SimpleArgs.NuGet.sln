@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleArgs.NuGet", "SimpleA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleArgs.Example", "..\SimpleArgs.Example\SimpleArgs.Example.csproj", "{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleArgs.Nuget.Sources", "SimpleArgs.Nuget.Sources\SimpleArgs.Nuget.Sources.csproj", "{E9A561E0-DD13-41C0-A150-90D9386D66A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,16 +42,19 @@ Global
 		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96BC1AA8-665E-48A7-AE3E-9E7D4C9B847F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A561E0-DD13-41C0-A150-90D9386D66A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A561E0-DD13-41C0-A150-90D9386D66A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A561E0-DD13-41C0-A150-90D9386D66A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0451BAEF-DF2E-4B98-8644-94EE9415E389} = {95F72DE4-EA99-4842-B8BE-976129F08F0B}
+		{E9A561E0-DD13-41C0-A150-90D9386D66A4} = {95F72DE4-EA99-4842-B8BE-976129F08F0B}
 	EndGlobalSection
 EndGlobal
