@@ -52,11 +52,16 @@ namespace SimpleArgs
         /// <param name="value"></param>
         private void SafeSetValue(string value)
         {
-            if (IsValueAllowed(value))
+            if (IsValueAllowed(value) && (CustomValidation == null || CustomValidation(value)))
             {
                 _Value = value;
+                IsValueValid = true;
                 if (Action != null)
                     Action(value);
+            }
+            else
+            {
+                IsValueValid = false;
             }
         }
 
@@ -148,6 +153,16 @@ namespace SimpleArgs
         /// An action to take when setting this parameter
         /// </summary>
         public Action<string> Action { get; set; }
+
+        /// <summary>
+        /// An action to take when setting this parameter
+        /// </summary>
+        public Func<string, bool> CustomValidation { get; set; }
+
+        /// <summary>
+        /// A value specifying whether the argument value is valid or invalid
+        /// </summary>
+        public bool IsValueValid { get; set; }
     }
 }
 
