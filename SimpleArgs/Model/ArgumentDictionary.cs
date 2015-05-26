@@ -6,6 +6,7 @@ namespace SimpleArgs
     public class ArgumentDictionary : Dictionary<string, Argument>
     {
         private readonly Dictionary<string, Argument> _ShortNameDictionary = new Dictionary<string, Argument>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<int, Argument> _SequenceDictionary = new Dictionary<int, Argument>();
         /// <summary>
         /// Argument dictionary default constructor. Key ignores case by default.
         /// </summary>
@@ -31,6 +32,11 @@ namespace SimpleArgs
             base.Add(inArgument.Name, inArgument);
             if (!string.IsNullOrWhiteSpace(inArgument.ShortName))
                 _ShortNameDictionary.Add(inArgument.ShortName, inArgument);
+            if (inArgument.SequenceId > 0)
+            {
+                _SequenceDictionary.Add(inArgument.SequenceId, inArgument);
+                AllowSequenceIds = true;
+            }
             OnArgumentAdded(inArgument);
         }
 
@@ -54,6 +60,8 @@ namespace SimpleArgs
                 ArgumentAdded(this, new ArgumentAddedEventArgs(inArgument));
         }
 
+        public bool AllowSequenceIds { get; set; }
+
         new public Argument this[string key]
         {
             get
@@ -61,9 +69,16 @@ namespace SimpleArgs
                 Argument value;
                 if (TryGetValue(key, out value))
                     return value;
-                if (_ShortNameDictionary.TryGetValue(key, out value))
-                    return value;
-                return null;
+                return _ShortNameDictionary.TryGetValue(key, out value) ? value : null;
+            }
+        }
+
+        public Argument this[int key]
+        {
+            get
+            {
+                Argument value;
+                return _SequenceDictionary.TryGetValue(key, out value) ? value : null;
             }
         }
 
