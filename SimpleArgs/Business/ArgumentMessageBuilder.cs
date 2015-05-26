@@ -25,13 +25,13 @@ namespace SimpleArgs
             builder.Append("  ");
             builder.Append(exeName);
             builder.Append(Environment.NewLine);
-            builder.Append(Environment.NewLine);
-            builder.Append("Arguments:");
-            builder.Append(Environment.NewLine);
             foreach (var pair in args)
             {
                 builder.Append(pair.Value.IsRequired ? string.Format(" {0}", pair.Value.Example) : string.Format(" [{0}]", pair.Value.Example));
             }
+            builder.Append(Environment.NewLine);
+            builder.Append(Environment.NewLine);
+            builder.Append("Arguments:");
             builder.Append(Environment.NewLine);
             foreach (var pair in args)
             {
