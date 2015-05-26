@@ -98,19 +98,37 @@ namespace SimpleArgs
                 string key;
                 string value;
                 GetArgumentPropertyValue(arg, out key, out value);
-                if (!ArgumentDictionary.ContainsKey(key) || ArgumentDictionary[key] == null)
+                if (!ArgumentDictionary.ContainsKey(key) || ArgumentDictionary[key] == null || string.IsNullOrWhiteSpace(value))
                 {
-                    if (!IgnoreUnknownParams)
-                        ExitWithInvalidParams();
+                    ReadUnnamedArgs(sequence, key, value);
                 }
                 else
                 {
-                    if (ArgumentDictionary[key].SequenceId != 0 && sequence != ArgumentDictionary[key].SequenceId)
-                        ExitWithInvalidParams();
-                    ArgumentDictionary[key].Value = value;
+                    SetValue(key, value);
                 }
                 sequence++;
             }
+        }
+
+        private void ReadUnnamedArgs(int sequence, string key, string value)
+        {
+            if (string.IsNullOrWhiteSpace(value) && _ArgumentDictionary.AllowSequenceIds)
+            {
+                value = key;
+                key = ArgumentDictionary[sequence].Name;
+                SetValue(key, value);
+            }
+            else if (!IgnoreUnknownParams)
+            {
+                ExitWithInvalidParams();
+            }
+        }
+
+        private void SetValue(string key, string value)
+        {
+            ArgumentDictionary[key].Value = value;
+            if (!ArgumentDictionary[key].IsValueValid) // If not AllowedValue or doesn't pass CustomValidation
+                ExitWithInvalidParams();
         }
 
         private void GetArgumentPropertyValue(string arg, out string property, out string value)

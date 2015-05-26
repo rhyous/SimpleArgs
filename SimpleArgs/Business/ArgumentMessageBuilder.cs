@@ -20,11 +20,17 @@ namespace SimpleArgs
         {
             string exeName = Path.GetFileName(Assembly.GetEntryAssembly().Location);
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usage:" + Environment.NewLine);
-            builder.Append("  " + exeName);
+            builder.Append("Usage:");
+            builder.Append(Environment.NewLine);
+            builder.Append("  ");
+            builder.Append(exeName);
+            builder.Append(Environment.NewLine);
+            builder.Append(Environment.NewLine);
+            builder.Append("Arguments:");
+            builder.Append(Environment.NewLine);
             foreach (var pair in args)
             {
-                builder.Append(pair.Value.IsRequired ? string.Format(" [{0}]", pair.Value.Example) : string.Format(" {0}", pair.Value.Example));
+                builder.Append(pair.Value.IsRequired ? string.Format(" {0}", pair.Value.Example) : string.Format(" [{0}]", pair.Value.Example));
             }
             builder.Append(Environment.NewLine);
             foreach (var pair in args)

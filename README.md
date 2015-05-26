@@ -58,3 +58,9 @@ A project that makes it easier to add command line arguments to applications.
     
     Press any key to continue . . .
     ```
+6. Access your arguments statically anywhere using ArgumentList.Instance.Args. ArgumentList.Instance.Args is a dictionary. All your args exist in the dictionary even if the user doesn't use the arg, so you shouldn't have to use TryGetValue.
+     
+    ```
+    ArgumentList.Instance.Args["Echo"].Value
+    ```
+
