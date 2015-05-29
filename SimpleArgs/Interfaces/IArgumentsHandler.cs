@@ -7,7 +7,7 @@ namespace SimpleArgs
         /// <summary>
         /// The list of args this handler handles
         /// </summary>
-        List<Argument> Args { get; set; }
+        List<Argument> Arguments { get; set; }
 
         /// <summary>
         /// The action to take when handling args.
@@ -17,6 +17,8 @@ namespace SimpleArgs
         void HandleArgs(IReadArgs inArgsHandler);
 
         bool Handled { get; set; }
+
+        int MinimumRequiredArgs { get; }
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleArgs
 {
@@ -51,8 +52,7 @@ namespace SimpleArgs
         }
 
         public delegate void ArgumentAddedEventHandler(object sender, ArgumentAddedEventArgs e);
-
-
+        
         protected virtual void OnArgumentAdded(Argument inArgument)
         {
             // Raise the event by using the () operator. 
@@ -85,6 +85,14 @@ namespace SimpleArgs
         public new bool ContainsKey(string inKeyNameOrShortName)
         {
             return base.ContainsKey(inKeyNameOrShortName) || _ShortNameDictionary.ContainsKey(inKeyNameOrShortName);
+        }
+        /// <summary>
+        /// Get the Groups from the list of args. If an argument has a group greater than 0,
+        /// then at  least one argument from that group is required.
+        /// </summary>
+        public IEnumerable<int> Groups
+        {
+            get { return from arg in Values where arg.Group > 0 select arg.Group; }
         }
     }
 }

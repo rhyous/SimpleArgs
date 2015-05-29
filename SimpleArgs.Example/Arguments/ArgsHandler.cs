@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleArgs.Example.Arguments
 {
@@ -7,32 +8,53 @@ namespace SimpleArgs.Example.Arguments
     /// A class that implements IArgumentHandler where command line
     /// arguments are defined.
     /// </summary>
-    public class ArgsHandler : IArgumentHandler
+    public sealed class ArgsHandler : ArgsHandlerBase
     {
         public ArgsHandler()
         {
-            Args = new List<Argument>
+            Arguments = new List<Argument>
             {
                 new Argument
                 {
                     Name = "Echo",
                     ShortName = "E",
                     Description = "I echo to the console whater you put after Echo=",
-                    Example = "Echo=\"Hello, World!\"",
+                    Example = "{name}=\"Hello, World!\"",
                     Action = (value) => { Console.WriteLine(value);}
                 },
+                new Argument
+                {
+                    Name = "ReverseEcho",
+                    ShortName = "RE",
+                    Description = "I echo to the console whater you put after Echo= but I do it in reverse",
+                    Example = "{name}=\"Hello, World!\"",
+                    Action = (value) => { Console.WriteLine(value.Reverse());}
+                },
+                new Argument
+                {
+                    Name = "Value",
+                    ShortName = "V",
+                    Description = "This is an example argument with a default value.",
+                    Example = "{name}=NonDefaultValue",
+                    DefaultValue = "SomeDefaultValue"
+                }
                 // Add more args here
             };
         }
 
-        public List<Argument> Args { get; set; }
-
-        public void HandleArgs(IReadArgs inArgsHandler)
+        public override int MinimumRequiredArgs
         {
-            Handled = true;
-            Console.WriteLine("I handled the args!!!");
+            get { return 1; } // At least one argument is required
         }
 
-        public bool Handled { get; set; }
+        public override void HandleArgs(IReadArgs inArgsHandler)
+        {
+            base.HandleArgs(inArgsHandler);
+            Console.WriteLine("I handled the args!!!");
+            if (Args.Value("Value") == Args.Get("Value").DefaultValue)
+                Console.WriteLine("You left the default value of {0}", Args.Value("Value"));
+            else
+                Console.WriteLine("You changed the default value to {0}", Args.Value("Value"));
+        }
     }
 }

@@ -44,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Args.cs" />
     <Compile Include="Business\ArgsManager.cs" />
     <Compile Include="Business\ArgsReader.cs" />
-    <Compile Include="Model\ArgsHanderBase.cs" />
+    <Compile Include="Model\AllowedValueCollection.cs" />
+    <Compile Include="Model\ArgumentsHandlerBase.cs" />
     <Compile Include="Model\Argument.cs" />
+    <Compile Include="Model\AllowedValueAddedEventArgs.cs" />
     <Compile Include="Model\ArgumentAddedEventArgs.cs" />
     <Compile Include="Model\ArgumentDictionary.cs" />
     <Compile Include="Business\ArgumentMessageBuilder.cs" />
@@ -55,7 +58,7 @@
     <Compile Include="Model\ArgumentList.cs" />
     <Compile Include="Business\CommonAllowedValues.cs" />
     <Compile Include="Business\ArgsHandlerCollection.cs" />
-    <Compile Include="Interfaces\IArgumentHandler.cs" />
+    <Compile Include="Interfaces\IArgumentsHandler.cs" />
     <Compile Include="Interfaces\IReadArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

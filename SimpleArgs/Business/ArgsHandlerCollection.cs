@@ -19,10 +19,11 @@ namespace SimpleArgs
         new public void Add(IArgumentHandler inArgsHandler)
         {
             base.Add(inArgsHandler);
-            foreach (var arg in inArgsHandler.Args)
+            foreach (var arg in inArgsHandler.Arguments)
             {
                 ArgumentList.Instance.Args.Add(arg);
             }
+            MinimumRequiredArgs += inArgsHandler.MinimumRequiredArgs;
         }
 
         public void HandleArgs(IReadArgs argsReader)
@@ -33,6 +34,8 @@ namespace SimpleArgs
                     handler.HandleArgs(argsReader);
             }
         }
+
+        public int MinimumRequiredArgs { get; set; }
     }
 }
 
