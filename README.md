@@ -14,7 +14,7 @@ A project that makes it easier to add command line arguments to applications.
     ```
     public ArgsHandler()
     {
-        Args = new List<Argument>
+        Arguments = new List<Argument>
         {
             new Argument
             {
@@ -54,6 +54,8 @@ A project that makes it easier to add command line arguments to applications.
     ```
     Usage:
       SimpleArgs.Example.exe Echo="Hello, World!"
+      
+    Arguments:
       Echo   (Optional) I echo to the console whater you put after Echo=
     
     Press any key to continue . . .
@@ -61,6 +63,7 @@ A project that makes it easier to add command line arguments to applications.
 6. Access your arguments statically anywhere using ArgumentList.Instance.Args. ArgumentList.Instance.Args is a dictionary. All your args exist in the dictionary even if the user doesn't use the arg, so you shouldn't have to use TryGetValue.
      
     ```
-    ArgumentList.Instance.Args["Echo"].Value
+    Args.Value("Echo") // returns value
+    Args.Get("Echo") // Returns Argument object
     ```
 
