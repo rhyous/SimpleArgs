@@ -13,11 +13,11 @@ namespace $rootnamespace$.Arguments
     /// A class that implements IArgumentHandler where command line
     /// arguments are defined.
     /// </summary>
-    public class ArgsHandler : ArgsHanderBase
+    public sealed class ArgsHandler : ArgsHanderBase
     {
         public ArgsHandler()
         {
-            Args = new List<Argument>
+            Arguments = new List<Argument>
             {
                 new Argument
                 {
@@ -27,6 +27,14 @@ namespace $rootnamespace$.Arguments
                     Example = "Echo=\"Hello, World!\"",
                     Action = (value) => { Console.WriteLine(value); }
                 },
+                new Argument
+                {
+                    Name = "Value",
+                    ShortName = "V",
+                    Description = "This is an example argument with a default value.",
+                    Example = "{name}=NonDefaultValue",
+                    DefaultValue = "SomeDefaultValue"
+                }
                 // Add more args here
             };
         }
