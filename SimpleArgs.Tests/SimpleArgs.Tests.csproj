@@ -54,10 +54,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Model\ArgumentActionCalledTests.cs" />
     <Compile Include="MsTestHelpers\DataRowExtensions.cs" />
     <Compile Include="MsTestHelpers\TestData.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Model\ArgumentDefaultValuteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\ArgumentAllowedValueTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleArgs\SimpleArgs.csproj">

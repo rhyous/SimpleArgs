@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace SimpleArgs
@@ -10,77 +9,82 @@ namespace SimpleArgs
     public class Argument
     {
         /// <summary>
-        /// If sequence Id is not 0, then the argument sequence must match.
-        /// For example, if SequenceId is 1, then this argument must be the
-        /// first argument.
+        /// If sequence Id is not 0, then the argument sequence must match.  For example, if
+        /// SequenceId is 1, then this argument must be the first argument.
         /// </summary>
         public int SequenceId { get; set; }
 
         /// <summary>
         /// In a command line argument such as this:
-        /// FirstName=John
+        ///   FirstName=John
         /// Name is "FirstName".
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
         /// In a command line argument such as this:
-        /// FirstName=John
-        /// There may be a shorter option for FirstName
-        /// such as this:
-        /// FN=John
+        ///   FirstName=John
+        /// There may be a shorter option for FirstName such as this:
+        ///   FN=John
         /// FN is the ShortName 
         /// </summary>
         public string ShortName { get; set; }
 
         /// <summary>
         /// In a command line argument such as this:
-        /// FirstName=John
+        ///   FirstName=John
         /// The value is the string "John".
         /// </summary>
         public string Value
         {
-            get { return _Value; }
+            get { return _Value ?? (_Value = DefaultValue); }
             set { SafeSetValue(value); }
         } private string _Value;
 
         /// <summary>
-        /// Only allow set if the value is an allowed value.
-        /// If the value is required, deny set if value is 
-        /// null, empty, or whitespace.
+        /// The Argument's default value.
+        /// </summary>
+        public string DefaultValue
+        {
+            get { return _DefaultValue; }
+            set
+            {
+                _DefaultValue = value;
+                IsValueAllowed(Value);
+            }
+        }
+
+        /// <summary>
+        /// Only allow set if the value is an allowed value. If the value is required, deny
+        /// set if value is null, empty, or whitespace.
         /// </summary>
         /// <param name="value"></param>
         private void SafeSetValue(string value)
         {
-            if (IsValueAllowed(value) && (CustomValidation == null || CustomValidation(value)))
+            if (IsValueAllowed(value))
             {
                 _Value = value;
-                IsValueValid = true;
                 if (Action != null)
                     Action(value);
             }
-            else
-            {
-                IsValueValid = false;
-            }
         }
 
-        private bool IsValueAllowed(string value)
+        private bool IsValueAllowed(string inValue = null)
         {
-            return (AllowedValues.Count == 0
-                || AllowedValues.Contains(value))
-                   && (!IsRequired || (IsRequired && !string.IsNullOrWhiteSpace(value)))
-                   && (string.IsNullOrWhiteSpace(Pattern) || Regex.IsMatch(value, Pattern));
+            if (inValue == null)
+                inValue = Value;
+            return IsValueValid = inValue != null
+                && (AllowedValues.Count == 0 || AllowedValues.Contains(inValue))
+                   && (!IsRequired || (IsRequired && !string.IsNullOrWhiteSpace(inValue)))
+                   && (string.IsNullOrWhiteSpace(Pattern) || Regex.IsMatch(inValue, Pattern))
+                   && (CustomValidation == null || CustomValidation(inValue));
         }
 
         /// <summary>
-        /// This is a the description of the command
-        /// line parameter that is seen when a user
+        /// This is a the description of the command  line parameter that is seen when a user
         /// runs the exe with a /?.
-        /// Use {Name} to reference an argument name so 
-        /// you don't have to update the output when you
-        /// change the name of an argument, it will
-        /// be updated for you.
+        /// Use {Name} to reference an argument name so you don't have to update the output 
+        /// when you change the name of an argument, it will be updated for you.
         /// </summary>
         public string Description
         {
@@ -89,15 +93,12 @@ namespace SimpleArgs
         } private string _Description;
 
         /// <summary>
-        /// This is an Example usage of the command 
-        /// line parameter. For example if the parameter
-        /// name is FirstName, the example string would
-        /// be this:
-        /// "FirstName=John"
-        /// {Name} = FirstName
-        /// Use {Name} so you don't have to update the output
-        /// when you change the name of an argument, it will
-        /// be updated for you.
+        /// This is an Example usage of the command line parameter. For example if the
+        /// parameter name is FirstName, the example string would be this:
+        ///   "FirstName=John"
+        ///   {Name} = FirstName
+        /// Use {Name} so you don't have to update the output  when you change the name of an
+        /// argument, it will  be updated for you.
         /// </summary>
         public string Example
         {
@@ -106,48 +107,80 @@ namespace SimpleArgs
         } private string _Example;
 
         /// <summary>
-        /// This is a setting for the command line
-        /// parameter. This setting determines if 
-        /// this command is required or not. However,
-        /// This setting doesn't enforce this. The 
-        /// enforcement is likely elsewhere in your
-        /// code. This is just a representation of
-        /// the fact that somewhere in your code, 
-        /// this parameter is required. 
+        /// This is a setting for the command line  parameter. This setting determines if 
+        /// this command is required or not. However,  This setting doesn't enforce this. The
+        /// enforcement is likely elsewhere in your  code. This is just a representation of
+        /// the fact that somewhere in your code,   this parameter is required. 
         /// 
-        /// This value is seen when a user runs the
-        /// exe with a /?.
+        /// This value is seen when a user runs the exe with a /?.
         /// </summary>
         public bool IsRequired { get; set; }
 
         /// <summary>
-        /// A list of allowed values. If this is empty,
-        /// any value is allowed.
-        /// For example, if true or false is expected, 
-        /// the allowed values might be: 
-        ///     true, false
-        /// Any other value is ignored and the default 
-        /// value, is used.
+        /// If a Group name is assigned, then at least one of the arguments in the group is
+        /// required.
         /// </summary>
-        public List<string> AllowedValues
-        {
-            get { return _AllowedValues ?? (_AllowedValues = new List<string>()); }
-            set { _AllowedValues = value; }
-        } private List<string> _AllowedValues;
+        public int Group { get; set; }
 
         /// <summary>
-        /// A regular expresion defining the pattern of
-        /// the  of allowed values. If this is empty,
+        /// A list of allowed values. If this is empty, any value is allowed.
+        /// For example, if true or false is expected, the allowed values might be: 
+        ///     true, false
+        /// Any other value is ignored and the default value, is used.
+        /// </summary>
+        public AllowedValueCollection AllowedValues
+        {
+            get
+            {
+                if (_AllowedValues == null)
+                {
+                    _AllowedValues = new AllowedValueCollection();
+                    _AllowedValues.AllowedValueAdded += OnAllowedValuesChanged;
+                }
+                return _AllowedValues;
+            }
+            set
+            {
+                if (_AllowedValues == value)
+                    return;
+                _AllowedValues = value;
+                if (_AllowedValues != null)
+                {
+                    IsValueAllowed(Value);
+                    _AllowedValues.AllowedValueAdded += OnAllowedValuesChanged;
+                }
+            }
+        }
+
+        private void OnAllowedValuesChanged(object sender, AllowedValueAddedEventArgs allowedValueAddedEventArgs)
+        {
+            if (AllowedValues != null)
+                IsValueAllowed(Value);
+        }
+
+        private AllowedValueCollection _AllowedValues;
+        private string _Pattern;
+        private Func<string, bool> _CustomValidation;
+        private string _DefaultValue;
+
+        /// <summary>
+        /// A regular expresion defining the pattern of the  of allowed values. If this is empty,
         /// any value is allowed.
-        /// For example, if a single digit is expected, 
-        /// the aPattern might be: 
+        /// For example, if a single digit is expected, the aPattern might be: 
         ///     [0-9]
         /// If multiple digits are expected:
         ///     [0-9]+
-        /// Any other value is ignored and the default 
-        /// value, is used.
+        /// Any other value is ignored and the default value, is used.
         /// </summary>
-        public string Pattern { get; set; }
+        public string Pattern
+        {
+            get { return _Pattern; }
+            set
+            {
+                _Pattern = value;
+                IsValueAllowed(Value);
+            }
+        }
 
         /// <summary>
         /// An action to take when setting this parameter
@@ -157,7 +190,15 @@ namespace SimpleArgs
         /// <summary>
         /// An action to take when setting this parameter
         /// </summary>
-        public Func<string, bool> CustomValidation { get; set; }
+        public Func<string, bool> CustomValidation
+        {
+            get { return _CustomValidation; }
+            set
+            {
+                _CustomValidation = value;
+                IsValueAllowed(Value);
+            }
+        }
 
         /// <summary>
         /// A value specifying whether the argument value is valid or invalid
