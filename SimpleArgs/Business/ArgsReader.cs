@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleArgs
 {
@@ -80,6 +81,12 @@ namespace SimpleArgs
                 return arg;
             }
         }
+
+        private List<int> Groups
+        {
+            get { return _Groups ?? (_Groups = new List<int>()); }
+        } private List<int> _Groups;
+
         #endregion
 
         #region Methods
@@ -88,9 +95,10 @@ namespace SimpleArgs
         /// </summary>
         public void ParseArgs(string[] inArgs)
         {
-            if (inArgs == null || inArgs.Length == 0)
+            if (inArgs == null || inArgs.Length < ArgsHandlerCollection.Instance.MinimumRequiredArgs)
             {
                 ExitWithInvalidParams();
+                return;
             }
             int sequence = 1;
             foreach (string arg in inArgs)
@@ -107,6 +115,13 @@ namespace SimpleArgs
                     SetValue(key, value);
                 }
                 sequence++;
+            }
+            if (Groups != null)
+            {
+                if (ArgumentList.Instance.Args.Groups.Any(n => !Groups.Contains(n)))
+                {
+                    ExitWithInvalidParams();
+                }
             }
         }
 
@@ -129,6 +144,8 @@ namespace SimpleArgs
             ArgumentDictionary[key].Value = value;
             if (!ArgumentDictionary[key].IsValueValid) // If not AllowedValue or doesn't pass CustomValidation
                 ExitWithInvalidParams();
+            if (ArgumentDictionary[key].Group > 0)
+                Groups.Add(ArgumentDictionary[key].Group);
         }
 
         private void GetArgumentPropertyValue(string arg, out string property, out string value)
