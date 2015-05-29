@@ -199,3 +199,4 @@ FakesAssemblies/
 *.dll
 *.bak
 
+/NuGet/SimpleArgs.Nuget.Sources/content/Arguments/ArgsHandler.cs.pp

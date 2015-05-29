@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.ObjectModel;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SimpleArgs.Tests.Model
 {
@@ -59,7 +60,7 @@ namespace SimpleArgs.Tests.Model
             {
                 Value = "a"
             };
-            arg.AllowedValues = new AllowedValueCollection { "a" };
+            arg.AllowedValues = new ObservableCollection<string> { "a" };
             Assert.IsTrue(arg.IsValueValid);
         }
 
@@ -70,7 +71,7 @@ namespace SimpleArgs.Tests.Model
             {
                 Value = "b"
             };
-            arg.AllowedValues = new AllowedValueCollection { "a" };
+            arg.AllowedValues = new ObservableCollection<string> { "a" };
             Assert.IsFalse(arg.IsValueValid);
         }
 

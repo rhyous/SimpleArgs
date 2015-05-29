@@ -37,6 +37,15 @@ namespace SimpleArgs.Example.Arguments
                     Description = "This is an example argument with a default value.",
                     Example = "{name}=NonDefaultValue",
                     DefaultValue = "SomeDefaultValue"
+                },
+                new Argument
+                {
+                    Name = "ExampleBool",
+                    ShortName = "eb",
+                    Description = "This is an example of a true/false parameter.",
+                    Example = "{name}=true",
+                    DefaultValue = "false",
+                    AllowedValues = CommonAllowedValues.TrueFalse
                 }
                 // Add more args here
             };

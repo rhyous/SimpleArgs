@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace SimpleArgs
 {
     public class CommonAllowedValues
     {
-        public static List<string> TrueFalse
+        public static ObservableCollection<string> TrueFalse
         {
-            get { return _TrueFalse ?? (_TrueFalse = new List<string> { "true", "false" }); }
-        } private static List<string> _TrueFalse;
+            get { return _TrueFalse ?? (_TrueFalse = new ObservableCollection<string> { "true", "false" }); }
+        } private static ObservableCollection<string> _TrueFalse;
 
         /// <summary>
         /// Must start with 1, or -1 through 9 or -9 but can any value after that.

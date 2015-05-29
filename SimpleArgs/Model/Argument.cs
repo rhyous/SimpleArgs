@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 
 namespace SimpleArgs
@@ -52,7 +54,7 @@ namespace SimpleArgs
                 _DefaultValue = value;
                 IsValueAllowed(Value);
             }
-        }
+        } private string _DefaultValue;
 
         /// <summary>
         /// Only allow set if the value is an allowed value. If the value is required, deny
@@ -128,14 +130,14 @@ namespace SimpleArgs
         ///     true, false
         /// Any other value is ignored and the default value, is used.
         /// </summary>
-        public AllowedValueCollection AllowedValues
+        public ObservableCollection<string> AllowedValues
         {
             get
             {
                 if (_AllowedValues == null)
                 {
-                    _AllowedValues = new AllowedValueCollection();
-                    _AllowedValues.AllowedValueAdded += OnAllowedValuesChanged;
+                    _AllowedValues = new ObservableCollection<string>();
+                    _AllowedValues.CollectionChanged += OnAllowedValuesChanged;
                 }
                 return _AllowedValues;
             }
@@ -147,22 +149,17 @@ namespace SimpleArgs
                 if (_AllowedValues != null)
                 {
                     IsValueAllowed(Value);
-                    _AllowedValues.AllowedValueAdded += OnAllowedValuesChanged;
+                    _AllowedValues.CollectionChanged += OnAllowedValuesChanged;
                 }
             }
-        }
+        } private ObservableCollection<string> _AllowedValues;
 
-        private void OnAllowedValuesChanged(object sender, AllowedValueAddedEventArgs allowedValueAddedEventArgs)
+        private void OnAllowedValuesChanged(object sender, NotifyCollectionChangedEventArgs collectionChangedEventArgs)
         {
             if (AllowedValues != null)
                 IsValueAllowed(Value);
         }
-
-        private AllowedValueCollection _AllowedValues;
-        private string _Pattern;
-        private Func<string, bool> _CustomValidation;
-        private string _DefaultValue;
-
+        
         /// <summary>
         /// A regular expresion defining the pattern of the  of allowed values. If this is empty,
         /// any value is allowed.
@@ -180,7 +177,7 @@ namespace SimpleArgs
                 _Pattern = value;
                 IsValueAllowed(Value);
             }
-        }
+        } private string _Pattern;
 
         /// <summary>
         /// An action to take when setting this parameter
@@ -198,7 +195,7 @@ namespace SimpleArgs
                 _CustomValidation = value;
                 IsValueAllowed(Value);
             }
-        }
+        } private Func<string, bool> _CustomValidation;
 
         /// <summary>
         /// A value specifying whether the argument value is valid or invalid
