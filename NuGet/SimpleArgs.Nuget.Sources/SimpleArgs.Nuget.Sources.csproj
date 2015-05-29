@@ -59,9 +59,12 @@
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="content\App_Packages\" />
+    <Folder Include="content\App_Packages\SimpleArgs.Sources.1.0.4\" />
     <Folder Include="lib\" />
     <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="exclude.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -83,4 +86,13 @@
     <Message Text="SUCCESS: Created package." Condition=" '$(Configuration)|$(Platform)|$(ExitCode)' == 'Debug|AnyCPU|0' " Importance="High" />
     <Message Text="SUCCESS: Published package." Condition=" '$(Configuration)|$(Platform)|$(ExitCode)' == 'Release|AnyCPU|0' " Importance="High" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>pushd "$(ProjectDir)Content\App_Packages\SimpleArgs.Sources.*\"
+del /q *
+for /d %25%25x in (*) do @rd /s /q "%25%25x"
+copy /Y "$(ProjectDir)exclude.txt"
+xcopy /S /Y /Exclude:exclude.txt "$(SolutionDir)..\SimpleArgs"
+del /F exclude.txt
+popd</PreBuildEvent>
+  </PropertyGroup>
 </Project>
