@@ -9,13 +9,33 @@ namespace SimpleArgs
             get { return _TrueFalse ?? (_TrueFalse = new ObservableCollection<string> { "true", "false" }); }
         } private static ObservableCollection<string> _TrueFalse;
 
+        public static ObservableCollection<string> EnabledDisabled
+        {
+            get { return _EnabledDisabled ?? (_EnabledDisabled = new ObservableCollection<string> { "enabled", "disabled" }); }
+        } private static ObservableCollection<string> _EnabledDisabled;
+
         /// <summary>
-        /// Must start with 1, or -1 through 9 or -9 but can any value after that.
-        /// 
+        /// Any digit value, positve or negative. Negative symbol (-) allowed as first character. No commas or decimals allowed.
         /// </summary>
         public static string Digits
         {
+            get { return "([-]?[0-9]*)"; }
+        }
+
+        /// <summary>
+        /// Must start with 1, or -1 through 9 or -9 but can any digit value after that.
+        /// </summary>
+        public static string NonZeroDigit
+        {
             get { return "([-]?[1-9]+[0-9]*)"; }
+        }
+
+        /// <summary>
+        /// Must have two decimal points. Can have $, but it must be first. Negative symbol (-) allowed as first character or second character if $ is present..
+        /// </summary>
+        public static string Money
+        {
+            get { return "([\\$]?[-]?[0-9]*)\\.[0-9]{2}"; }
         }
     }
 }
