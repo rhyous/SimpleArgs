@@ -26,6 +26,13 @@ namespace SimpleArgs
         {
             return inString.ToCharArray().Where(c => !char.IsDigit(c) && c != '-').Aggregate(inString, (current, c) => current.Replace(c.ToString(), ""));
         }
+
+        public static string EndSentence(this string inString)
+        {
+            if (inString.EndsWith("."))
+                return inString;
+            return inString + ".";
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -24,7 +25,6 @@ namespace SimpleArgs
             builder.Append(Environment.NewLine);
             builder.Append("  ");
             builder.Append(exeName);
-            builder.Append(Environment.NewLine);
             foreach (var pair in args)
             {
                 builder.Append(pair.Value.IsRequired ? string.Format(" {0}", pair.Value.Example) : string.Format(" [{0}]", pair.Value.Example));
@@ -33,10 +33,16 @@ namespace SimpleArgs
             builder.Append(Environment.NewLine);
             builder.Append("Arguments:");
             builder.Append(Environment.NewLine);
+            int biggestArgNameLength = args.Keys.Aggregate("", (max, cur) => max.Length > cur.Length ? max : cur).Length;
             foreach (var pair in args)
             {
-                string optionalOrRequired = pair.Value.IsRequired ? "Required" : "Optional";
-                builder.Append(string.Format("  {0}\t{1} ({2}) {3} {4}", pair.Key, pair.Value.Value, optionalOrRequired, pair.Value.Description, Environment.NewLine));
+                var arg = pair.Value;
+                string optionalOrRequired = arg.IsRequired ? "Required" : "Optional";
+                builder.Append(string.Format("  {0}\t", pair.Key.PadRight(biggestArgNameLength)));
+                    builder.Append(string.Format("({0}) {1}", optionalOrRequired, arg.Description.EndSentence()));
+                if (!string.IsNullOrWhiteSpace(pair.Value.DefaultValue))
+                    builder.Append(string.Format(" Default value: {0}", arg.DefaultValue));
+                builder.Append(Environment.NewLine);
             }
 
             return builder.ToString();
