@@ -38,7 +38,7 @@ A project that makes it easier to add command line arguments to applications.
     }
     ```
 
-4. In the ArgsHandler.cs file, you new take action point is in the HandleArgs() method.
+4. In the ArgsHandler.cs file, your new take action point is in the HandleArgs() method.
 
     ```
     public void HandleArgs(IReadArgs inArgsHandler)
