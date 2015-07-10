@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="content\Arguments\ArgsHandler.cs.pp" />
     <None Include="NuGetPackage.ps1" />
     <None Include="NuGetSetup.ps1" />
     <None Include="NuGet.exe" />
@@ -59,8 +60,7 @@
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="content\App_Packages\SimpleArgs.Sources.1.0.4\" />
-    <Folder Include="content\Arguments\" />
+    <Folder Include="content\App_Packages\SimpleArgs.Sources.1.0.7\" />
     <Folder Include="lib\" />
     <Folder Include="src\" />
   </ItemGroup>
