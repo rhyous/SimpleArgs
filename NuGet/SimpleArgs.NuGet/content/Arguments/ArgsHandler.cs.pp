@@ -10,7 +10,7 @@ namespace $rootnamespace$.Arguments
     //
 
     /// <summary>
-    /// A class that implements IArgumentHandler where command line
+    /// A class that implements IArgumentsHandler where command line
     /// arguments are defined.
     /// </summary>
     public sealed class ArgsHandler : ArgsHandlerBase

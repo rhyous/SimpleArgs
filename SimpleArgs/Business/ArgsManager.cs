@@ -13,7 +13,7 @@
         }
         #endregion
 
-        public void Start(IArgumentHandler handler, string[] args)
+        public void Start(IArgumentsHandler handler, string[] args)
         {
             ArgsHandlerCollection.Instance.Add(handler);
             IReadArgs argsReader = new ArgsReader(ArgumentList.Instance);

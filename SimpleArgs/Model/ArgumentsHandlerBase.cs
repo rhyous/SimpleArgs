@@ -2,7 +2,7 @@
 
 namespace SimpleArgs
 {
-    public abstract class ArgsHandlerBase : IArgumentHandler
+    public abstract class ArgsHandlerBase : IArgumentsHandler
     {
         public virtual List<Argument> Arguments { get; set; }
 

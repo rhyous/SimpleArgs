@@ -2,7 +2,7 @@
 
 namespace SimpleArgs
 {
-    public class ArgsHandlerCollection : List<IArgumentHandler>
+    public class ArgsHandlerCollection : List<IArgumentsHandler>
     {
         #region Constructor and Singleton
         private ArgsHandlerCollection()
@@ -16,7 +16,7 @@ namespace SimpleArgs
         } private static ArgsHandlerCollection _Instance;
         #endregion
 
-        new public void Add(IArgumentHandler inArgsHandler)
+        new public void Add(IArgumentsHandler inArgsHandler)
         {
             base.Add(inArgsHandler);
             foreach (var arg in inArgsHandler.Arguments)

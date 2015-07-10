@@ -2,7 +2,7 @@
 
 namespace SimpleArgs
 {
-    public interface IArgumentHandler
+    public interface IArgumentsHandler
     {
         /// <summary>
         /// The list of args this handler handles
