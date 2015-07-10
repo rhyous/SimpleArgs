@@ -13,13 +13,14 @@
         }
         #endregion
 
+        public IReadArgs ArgsReader { get; private set; }
+
         public void Start(IArgumentsHandler handler, string[] args)
         {
             ArgsHandlerCollection.Instance.Add(handler);
-            IReadArgs argsReader = new ArgsReader(ArgumentList.Instance);
-            argsReader.ParseArgs(args);
-            ArgsHandlerCollection.Instance.HandleArgs(argsReader);
+            ArgsReader = new ArgsReader(ArgumentList.Instance);
+            ArgsReader.ParseArgs(args);
+            ArgsHandlerCollection.Instance.HandleArgs(ArgsReader);
         }
-
     }
 }
