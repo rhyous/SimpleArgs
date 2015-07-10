@@ -13,7 +13,7 @@ namespace $rootnamespace$.Arguments
     /// A class that implements IArgumentHandler where command line
     /// arguments are defined.
     /// </summary>
-    public sealed class ArgsHandler : ArgsHanderBase
+    public sealed class ArgsHandler : ArgsHandlerBase
     {
         public ArgsHandler()
         {
