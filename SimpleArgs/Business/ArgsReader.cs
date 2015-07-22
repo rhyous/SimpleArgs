@@ -150,7 +150,7 @@ namespace SimpleArgs
 
         private void GetArgumentPropertyValue(string arg, out string property, out string value)
         {
-            var argSplit = arg.Split("=:".ToCharArray());
+            var argSplit = arg.Split("=".ToCharArray());
             property = string.Empty;
             value = string.Empty;
             if (argSplit.Length > 0)
