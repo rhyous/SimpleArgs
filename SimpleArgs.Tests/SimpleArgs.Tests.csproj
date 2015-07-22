@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Business\CommonAllowedValuesTests.cs" />
+    <Compile Include="Business\ArgsReaderTests.cs" />
     <Compile Include="Data\DataSources.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Model\ArgumentActionCalledTests.cs" />

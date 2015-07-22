@@ -45,9 +45,16 @@
             CreateMessage();
         }
 
+        public IArgumentMessageBuilder MessageBuilder
+        {
+            get { return _MessageBuilder ?? (_MessageBuilder = ArgumentMessageBuilder.Instance); }
+            set { _MessageBuilder = value; }
+        } private IArgumentMessageBuilder _MessageBuilder;
+
+
         void OnArgumentAdded(object sender, ArgumentAddedEventArgs e)
         {
-            Message = ArgumentMessageBuilder.Instance.CreateMessage(Args);
+            Message = MessageBuilder.CreateMessage(Args);
         }
 
         /// <summary>
