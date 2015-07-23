@@ -8,6 +8,7 @@
         }
     }
 }
+
 #region Fork and Contribute License
 /*
 SimpleArgs - Easy coding of command line arguments.
