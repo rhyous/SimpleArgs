@@ -20,7 +20,7 @@ namespace SimpleArgs.Example.Arguments
                     ShortName = "E",
                     Description = "I echo to the console whater you put after Echo=",
                     Example = "{name}=\"Hello, World!\"",
-                    Action = (value) => { Console.WriteLine(value);}
+                    Action = value => { Console.WriteLine(value);}
                 },
                 new Argument
                 {
@@ -28,7 +28,7 @@ namespace SimpleArgs.Example.Arguments
                     ShortName = "RE",
                     Description = "I echo to the console whater you put after Echo= but I do it in reverse",
                     Example = "{name}=\"Hello, World!\"",
-                    Action = (value) => { Console.WriteLine(value.Reverse());}
+                    Action = value => { Console.WriteLine(value.Reverse());}
                 },
                 new Argument
                 {
@@ -47,7 +47,6 @@ namespace SimpleArgs.Example.Arguments
                     DefaultValue = "false",
                     AllowedValues = CommonAllowedValues.TrueFalse
                 }
-                // Add more args here
             };
         }
 
