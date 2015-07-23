@@ -1,4 +1,6 @@
-﻿namespace SimpleArgs
+﻿using System.Collections.Generic;
+
+namespace SimpleArgs
 {
     public class ArgsManager
     {
@@ -15,12 +17,23 @@
 
         public IReadArgs ArgsReader { get; private set; }
 
-        public void Start(IArgumentsHandler handler, string[] args)
+        public void Start(string[] args)
         {
-            ArgsHandlerCollection.Instance.Add(handler);
             ArgsReader = new ArgsReader(ArgumentList.Instance);
             ArgsReader.ParseArgs(args);
             ArgsHandlerCollection.Instance.HandleArgs(ArgsReader);
+        }
+
+        public void Start(IArgumentsHandler handler, string[] args)
+        {
+            ArgsHandlerCollection.Instance.Add(handler);
+            Start(args);
+        }
+
+        public void Start(List<IArgumentsHandler> handlers, string[] args)
+        {
+            ArgsHandlerCollection.Instance.AddRange(handlers);
+            Start(args);
         }
     }
 }
