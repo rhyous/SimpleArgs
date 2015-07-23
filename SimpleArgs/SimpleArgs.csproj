@@ -47,6 +47,7 @@
     <Compile Include="Business\Args.cs" />
     <Compile Include="Business\ArgsManager.cs" />
     <Compile Include="Business\ArgsReader.cs" />
+    <Compile Include="Interfaces\IArgumentMessageBuilder.cs" />
     <Compile Include="Model\ArgumentsHandlerBase.cs" />
     <Compile Include="Model\Argument.cs" />
     <Compile Include="Model\ArgumentAddedEventArgs.cs" />

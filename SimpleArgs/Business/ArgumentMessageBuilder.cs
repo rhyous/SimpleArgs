@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SimpleArgs
 {
-    public class ArgumentMessageBuilder
+    public class ArgumentMessageBuilder : IArgumentMessageBuilder
     {
         public static ArgumentMessageBuilder Instance
         {
