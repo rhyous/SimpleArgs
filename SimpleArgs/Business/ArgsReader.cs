@@ -95,11 +95,22 @@ namespace SimpleArgs
         /// </summary>
         public void ParseArgs(string[] inArgs)
         {
+            ValidateMinimumRequiredArgs(inArgs);
+            SetArgValues(inArgs);
+            ValidateAllRequiredArgsAreProvided();
+            ValidateGroupArgs();
+        }
+
+        private void ValidateMinimumRequiredArgs(string[] inArgs)
+        {
             if (inArgs == null || inArgs.Length < ArgsHandlerCollection.Instance.MinimumRequiredArgs)
             {
                 ExitWithInvalidParams();
-                return;
             }
+        }
+
+        private void SetArgValues(string[] inArgs)
+        {
             int sequence = 1;
             foreach (string arg in inArgs)
             {
@@ -116,13 +127,20 @@ namespace SimpleArgs
                 }
                 sequence++;
             }
-            if (Groups != null)
-            {
-                if (ArgumentList.Instance.Args.Groups.Any(n => !Groups.Contains(n)))
-                {
-                    ExitWithInvalidParams();
-                }
-            }
+        }
+
+        private void GetArgumentPropertyValue(string arg, out string property, out string value)
+        {
+            var argSplit = arg.Split("=:".ToCharArray(), 2);
+            property = string.Empty;
+            value = string.Empty;
+            if (argSplit.Length > 0)
+                property = argSplit[0].Trim(IgnoreCharacters);
+            if (argSplit.Length > 1)
+                value = argSplit[1].Trim(IgnoreCharacters);
+            // If they have a parameter like /a or -a then assume a is a bool and set a to true.
+            else if (arg[0] == '/' || arg[0] == '-')
+                value = "true";
         }
 
         private void ReadUnnamedArgs(int sequence, string key, string value)
@@ -147,19 +165,25 @@ namespace SimpleArgs
             if (ArgumentDictionary[key].Group > 0)
                 Groups.Add(ArgumentDictionary[key].Group);
         }
-
-        private void GetArgumentPropertyValue(string arg, out string property, out string value)
+        
+        private void ValidateAllRequiredArgsAreProvided()
         {
-            var argSplit = arg.Split("=:".ToCharArray(),2);
-            property = string.Empty;
-            value = string.Empty;
-            if (argSplit.Length > 0)
-                property = argSplit[0].Trim(IgnoreCharacters);
-            if (argSplit.Length > 1)
-                value = argSplit[1].Trim(IgnoreCharacters);
-            // If they have a parameter like /a or -a then assume a is a bool and set a to true.
-            else if (arg[0] == '/' || arg[0] == '-')
-                value = "true";
+            foreach (var argsHandler in ArgsHandlerCollection.Instance)
+            {
+                if (argsHandler.Arguments.Any(arg => arg.IsRequired && !arg.IsValueValid))
+                    ExitWithInvalidParams();
+            }
+        }
+
+        private void ValidateGroupArgs()
+        {
+            if (Groups != null)
+            {
+                if (ArgumentList.Instance.Args.Groups.Any(n => !Groups.Contains(n)))
+                {
+                    ExitWithInvalidParams();
+                }
+            }
         }
 
         /// <summary>

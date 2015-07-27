@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleArgs
 {
@@ -10,7 +11,7 @@ namespace SimpleArgs
 
         public virtual int MinimumRequiredArgs
         {
-            get { return 0; }
+            get { return Arguments.Count(a => a.IsRequired); }
         }
 
         public virtual void HandleArgs(IReadArgs inArgsHandler)
