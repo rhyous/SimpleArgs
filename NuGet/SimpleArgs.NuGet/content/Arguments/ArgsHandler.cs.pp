@@ -24,7 +24,7 @@ namespace $rootnamespace$.Arguments
                     Name = "Echo",
                     ShortName = "E",
                     Description = "I echo to the console whater you put after Echo=",
-                    Example = "Echo=\"Hello, World!\"",
+                    Example = "{name}=\"Hello, World!\"",
                     Action = (value) => { Console.WriteLine(value); }
                 },
                 new Argument

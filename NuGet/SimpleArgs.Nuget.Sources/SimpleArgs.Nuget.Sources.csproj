@@ -60,7 +60,7 @@
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="content\App_Packages\SimpleArgs.Sources.1.0.8\" />
+    <Folder Include="content\App_Packages\SimpleArgs.Sources.1.0.9\" />
     <Folder Include="lib\" />
     <Folder Include="src\" />
   </ItemGroup>
