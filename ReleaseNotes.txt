@@ -1,0 +1,7 @@
+1.10.0
+
+SimpleArgs
+- Updated the digit regular expression.
+
+SimpleArgs.Sources
+- Changed NuGet to add source files using Add As Link so the only copy of the source is in the Packages directory.
