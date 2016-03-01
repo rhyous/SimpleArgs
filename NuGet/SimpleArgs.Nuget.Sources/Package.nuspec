@@ -7,7 +7,7 @@
     <authors>Jared Barneck (Rhyous)</authors>
     <owners>Jared Barneck (Rhyous)</owners>
     <description>Easy coding of command line arguments.</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>https://github.com/rhyous/SimpleArgs/blob/master/ReleaseNotes.txt</releaseNotes>
     <summary>
       Quickly handle command line arguments. NuGet packages adds an
       example arguments handler class, where you describe your arguments 
