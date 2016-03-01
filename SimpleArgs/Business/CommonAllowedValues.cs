@@ -19,7 +19,7 @@ namespace SimpleArgs
         /// </summary>
         public static string Digits
         {
-            get { return "([-]?[0-9]*)"; }
+            get { return "(^$|^[-]?[0-9]+)"; }
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SimpleArgs
         /// </summary>
         public static string NonZeroDigit
         {
-            get { return "([-]?[1-9]+[0-9]*)"; }
+            get { return "(^[-]?[1-9]+[0-9]*)"; }
         }
 
         /// <summary>
