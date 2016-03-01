@@ -100,46 +100,98 @@ namespace SimpleArgs.Tests.Model
 
         #region Pattern
         [TestMethod]
-        public void ArgumentPatternMatchTestTrue()
+        public void ArgumentPatternMatchSetValuePositveTestTrue()
         {
+            // Arrange
             var arg = new Argument
             {
                 Pattern = CommonAllowedValues.Digits
             };
+
+            // Act
             arg.Value = 100.ToString();
+
+            // Assert
             Assert.IsTrue(arg.IsValueValid);
         }
 
         [TestMethod]
-        public void ArgumentPatternMatchTestFalse()
+        public void ArgumentPatternMatchSetPatternPositveTestTrue()
         {
+            // Arrange 
+            var arg = new Argument
+            {
+                Value = 100.ToString(),
+            };
+
+            // Act 
+            arg.Pattern = CommonAllowedValues.Digits;
+            
+            //Assert
+            Assert.IsTrue(arg.IsValueValid);
+        }
+
+        [TestMethod]
+        public void ArgumentPatternMatchSetValueNegativeDigitTestTrue()
+        {
+            // Arrange
             var arg = new Argument
             {
                 Pattern = CommonAllowedValues.Digits
             };
+
+            // Act
+            arg.Value = (-100).ToString();
+
+            // Assert
+            Assert.IsTrue(arg.IsValueValid);
+        }
+
+        [TestMethod]
+        public void ArgumentPatternMatchSetPatternNegativeDigitTestTrue()
+        {
+            // Arrange 
+            var arg = new Argument
+            {
+                Value = (-100).ToString(),
+            };
+
+            // Act 
+            arg.Pattern = CommonAllowedValues.Digits;
+
+            //Assert
+            Assert.IsTrue(arg.IsValueValid);
+        }
+
+        [TestMethod]
+        public void ArgumentPatternMatchSetValueTestCharsFalse()
+        {
+            // Arrange 
+            var arg = new Argument
+            {
+                Pattern = CommonAllowedValues.Digits
+            };
+
+            // Act 
             arg.Value = "abc";
+
+            //Assert
             Assert.IsFalse(arg.IsValueValid);
         }
 
         [TestMethod]
-        public void ArgumentPatternMatchSetSecondTestTrue()
+        public void ArgumentPatternMatchSetPatternTestCharsFalse()
         {
-            var arg = new Argument
-            {
-                Value = 100.ToString()
-            };
-            arg.Pattern = CommonAllowedValues.Digits;
-            Assert.IsTrue(arg.IsValueValid);
-        }
-
-        [TestMethod]
-        public void ArgumentPatternMatchSetSecondTestFalse()
-        {
+            // Arrange
             var arg = new Argument
             {
                 Value = "abc"
             };
+
+            // Act
             arg.Pattern = CommonAllowedValues.Digits;
+
+            // Assert
             Assert.IsFalse(arg.IsValueValid);
         }
         #endregion
