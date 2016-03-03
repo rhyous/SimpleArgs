@@ -6,27 +6,18 @@
     <title>SimpleArgs.Sources</title>
     <authors>Jared Barneck (Rhyous)</authors>
     <owners>Jared Barneck (Rhyous)</owners>
-    <description>Easy coding of command line arguments.</description>
+    <description>Quickly handle command line arguments. This NuGet package adds an example arguments handler class, where you describe your arguments using a simple poco objects. All the boilerplate code to create the usage message is done for you. You can take action on set or after all arguments are set. This NuGet pakage is source only, great for single file executables.</description>
     <releaseNotes>https://github.com/rhyous/SimpleArgs/blob/master/ReleaseNotes.txt</releaseNotes>
-    <summary>
-      Quickly handle command line arguments. NuGet packages adds an
-      example arguments handler class, where you describe your arguments 
-      using a simple poco objects. All the boilerplate code to create the 
-      usage message is done for you. You can take action on set or after
-      all arguments are set.
-      Source only, great for single file executables.
-    </summary>
+    <summary>Easy coding of command line arguments.</summary>
     <language>en-US</language>
     <projectUrl>https://github.com/rhyous/SimpleArgs</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/rhyous/SimpleArgs/master/Docs/Images/SimpleArgs.Logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <licenseUrl>https://github.com/rhyous/SimpleArgs/blob/master/Fork%20and%20Contribute%20License.txt</licenseUrl>
     <copyright>Copyright Jared Barneck (Rhyous) 2015</copyright>
-    <references></references>
-    <tags>command line arguments parameters</tags>
+    <tags>command line arguments parameters args</tags>
   </metadata>
   <files>
-    <file src="lib\" target="lib" />
     <file src="tools\" target="tools" />
     <file src="content\" target="content" />
     <file src="src\" target="src" />

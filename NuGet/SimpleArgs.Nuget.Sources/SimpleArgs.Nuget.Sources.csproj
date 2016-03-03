@@ -49,7 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\Arguments\ArgsHandler.cs.pp" />
     <None Include="NuGetPackage.ps1" />
     <None Include="NuGetSetup.ps1" />
     <None Include="NuGet.exe" />
@@ -62,6 +61,7 @@
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="content\Arguments\" />
     <Folder Include="lib\" />
     <Folder Include="src\App_Packages\SimpleArgs.Sources.1.1.0\" />
   </ItemGroup>
@@ -89,7 +89,7 @@
     <Message Text="SUCCESS: Published package." Condition=" '$(Configuration)|$(Platform)|$(ExitCode)' == 'Release|AnyCPU|0' " Importance="High" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>pushd "$(ProjectDir)Content\App_Packages\SimpleArgs.Sources.*\"
+    <PreBuildEvent>pushd "$(ProjectDir)src\App_Packages\SimpleArgs.Sources.*\"
 del /q *
 for /d %25%25x in (*) do @rd /s /q "%25%25x"
 copy /Y "$(ProjectDir)exclude.txt"
