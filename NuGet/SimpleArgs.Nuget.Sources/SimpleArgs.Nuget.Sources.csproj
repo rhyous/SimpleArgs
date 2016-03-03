@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\Arguments\" />
-    <Folder Include="lib\" />
     <Folder Include="src\App_Packages\SimpleArgs.Sources.1.1.0\" />
   </ItemGroup>
   <ItemGroup>
