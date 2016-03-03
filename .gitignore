@@ -200,3 +200,4 @@ FakesAssemblies/
 *.bak
 
 /NuGet/SimpleArgs.Nuget.Sources/content/*
+/NuGet/SimpleArgs.Nuget.Sources/src/*
