@@ -8,7 +8,6 @@ param($installPath, $toolsPath, $package, $project)
 # $project is a reference to the project the package was installed to.
 
 # Variables
-$project = get-project
 $src = "src"
 $packageName = [System.IO.Path]::GetFileName($installPath)
 
