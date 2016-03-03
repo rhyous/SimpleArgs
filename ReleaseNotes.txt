@@ -1,4 +1,9 @@
-1.10.0
+1.1.1
+- Fixed NuGet package issues
+- Removed unused usings
+- Changed file version of dll to 1.1.1
+
+1.1.0
 
 SimpleArgs
 - Updated the digit regular expression.
