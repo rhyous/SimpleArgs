@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\Arguments\" />
-    <Folder Include="src\App_Packages\SimpleArgs.Sources.1.1.0\" />
+    <Folder Include="src\App_Packages\SimpleArgs.Sources.1.1.1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="exclude.txt" />
