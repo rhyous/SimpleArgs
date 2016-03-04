@@ -1,3 +1,6 @@
+1.1.1.1
+- A fix to the SimleArgs.Sources NuGet package
+
 1.1.1
 - Fixed NuGet package issues
 - Removed unused usings
