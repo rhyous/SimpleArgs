@@ -63,7 +63,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\net40-client\SimpleArgs.dll" />
+    <Folder Include="lib\net40-client\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
