@@ -18,8 +18,8 @@
     <tags>command line arguments parameters args</tags>
   </metadata>
   <files>
+    <file src="content\" target="content" />
     <file src="lib\" target="lib" />
     <file src="tools\" target="tools" />
-    <file src="content\" target="content" />
   </files>
 </package>
