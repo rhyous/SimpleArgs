@@ -199,7 +199,7 @@ FakesAssemblies/
 *.dll
 *.bak
 
-/NuGet/SimpleArgs.Nuget.Sources/content/*
-/NuGet/SimpleArgs.Nuget.Sources/src/*
+/NuGet/Rhyous.SimpleArgs.Nuget.Sources/content/*
+/NuGet/Rhyous.SimpleArgs.Nuget.Sources/src/*
 
 [Aa]pp_[Ppackages]/
