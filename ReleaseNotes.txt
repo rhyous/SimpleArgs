@@ -1,3 +1,6 @@
+1.1.3
+- ArgsHandler.cs.pp file in NuGet package had outdated namespace.
+
 1.1.2
 - Rhyous brand prefix added (this will require updating using statements, which while easy is still a breaking change.)
   Do a project wide find and replace. 
