@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\Arguments\" />
-    <Folder Include="src\App_Packages\Rhyous.SimpleArgs.Sources.1.1.2\" />
+    <Folder Include="src\App_Packages\Rhyous.SimpleArgs.Sources.1.1.3\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="exclude.txt" />

@@ -1,4 +1,4 @@
-﻿using SimpleArgs;
+﻿using Rhyous.SimpleArgs;
 using System;
 using System.Collections.Generic;
 
