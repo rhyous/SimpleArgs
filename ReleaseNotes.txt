@@ -1,5 +1,8 @@
 1.1.2
 - Rhyous brand prefix added (this will require updating using statements, which while easy is still a breaking change.)
+  Do a project wide find and replace. 
+  Find: using SimpleArgs
+  Replace: using Rhyous.SimpleArgs
 
 1.1.1.1
 - A fix to the SimleArgs.Sources NuGet package
