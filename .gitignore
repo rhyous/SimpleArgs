@@ -201,3 +201,5 @@ FakesAssemblies/
 
 /NuGet/SimpleArgs.Nuget.Sources/content/*
 /NuGet/SimpleArgs.Nuget.Sources/src/*
+
+[Aa]pp_[Ppackages]/
