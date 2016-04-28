@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>SimpleArgs</id>
+    <id>Rhyous.SimpleArgs</id>
     <version>1.1.3</version>
-    <title>SimpleArgs</title>
+    <title>Rhyous.SimpleArgs</title>
     <authors>Jared Barneck (Rhyous)</authors>
     <owners>Jared Barneck (Rhyous)</owners>
     <description>Quickly handle command line arguments. This NuGet package adds an example arguments handler class, where you describe your arguments using a simple poco objects. All the boilerplate code to create the usage message is done for you. You can take action on set or after all arguments are set. This NuGet pakage is source only, great for single file executables.</description>
