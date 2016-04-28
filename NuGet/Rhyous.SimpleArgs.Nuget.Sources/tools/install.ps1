@@ -40,7 +40,7 @@ function AddLinkedFiles($path, $addLocation, $canLink)
         if (Test-Path $item.FullName -PathType Container) 
         {
             if ( $canLink) {
-                $addFolder = $project.ProjectItems|Where-Object {$_.Name -eq $item}
+                $addFolder = $project.ProjectItems|Where-Object {$_.FullName -eq $item.FullName}
                 if (!$addFolder) {
                     $addFolder = $addLocation.ProjectItems.AddFolder($item)
                 }
