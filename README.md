@@ -7,10 +7,7 @@ A project that makes it easier to add command line arguments to applications.
 
     ```
     install-package SimpleArgs
-    ```
-Or if you don't want a separate dll, install this:
-
-    ```
+    // Or if you don't want a separate dll, install this:
     install-package SimpleArgs.Sources
     ```
 
