@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Rhyous.SimpleArgs, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rhyous.SimpleArgs.2.0.0\lib\net40-client\Rhyous.SimpleArgs.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arguments\ArgsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Rhyous.SimpleArgs.Net40Client\Rhyous.SimpleArgs.Net40Client.csproj">
+      <Project>{280fd5fb-c77c-48ac-bfb1-39964df61775}</Project>
+      <Name>Rhyous.SimpleArgs.Net40Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Rhyous.SimpleArgs.Example.Shared\Rhyous.SimpleArgs.Example.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
