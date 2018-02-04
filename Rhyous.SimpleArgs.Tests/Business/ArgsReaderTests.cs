@@ -1,44 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhyous.SimpleArgs;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SimpleArgs.Tests.Business
+namespace Rhyous.SimpleArgs.Tests.Business
 {
     [TestClass]
-    public class ArgsReaderTests
+    public partial class ArgsReaderTests
     {
-        [ClassInitialize()]
-        public static void ClassInit(TestContext context)
-        {
-            ArgumentList.Instance.MessageBuilder = new FakeMessageBuilder();
-            ArgsHandlerCollection.Instance.Add(new ArgsHandler());
-        }
-
-        public sealed class ArgsHandler : ArgsHandlerBase
-        {
-            public ArgsHandler()
-            {
-                Arguments = new List<Argument>
-                {
-                    new Argument
-                    {
-                        Name = "File",
-                        ShortName = "f",
-                        Description = "This is an example of a file path parameter.",
-                        Example = @"{name}=""C:\some\path\to\a\file.txt""",
-                        DefaultValue = @"C:\path\to\a\file.txt",
-                    },
-                    new Argument
-                    {
-                        Name = "Param",
-                        ShortName = "p",
-                        Description = "This is an example parameter.",
-                        Example = @"{name}=value",
-                    }
-                    // Add more args here
-                };
-            }
-        }
 
         public class FakeMessageBuilder : IArgumentMessageBuilder
         {
@@ -47,34 +13,57 @@ namespace SimpleArgs.Tests.Business
                 return "";
             }
         }
-
-
-
+        
         [TestMethod]
         public void TestFilePathAsParameter()
         {
-            IReadArgs argsReader = new ArgsReader(ArgumentList.Instance) { IgnoreUnknownParams = true };
-            argsReader.ParseArgs(new[] { @"File=""C:\some\Awesome\File.txt""" });
+            // Arrange
+            var listName = "PathAsParamter";
+            ArgumentMessageBuilder.Instance.ExeName = "test.exe";
+            var argsList = new ArgumentList(listName) { MessageBuilder = new FakeMessageBuilder() };
+            var argsHandlerList = new ArgsHandlerList(argsList.Args);
+            IReadArgs argsReader = new ArgsReader(argsHandlerList, argsList.Message) { IgnoreUnknownParams = true };
+            new ArgsManager<ArgsHandler>(argsReader, argsList, argsHandlerList);
             const string expected = @"C:\some\Awesome\File.txt";
-            Assert.AreEqual(expected, Args.Value("File"));
+
+            // Act
+            argsReader.ParseArgs(new[] { @"File=""C:\some\Awesome\File.txt""" });
+
+            // Assert
+            Assert.AreEqual(expected, Args.Value("File", listName));
         }
 
         [TestMethod]
         public void TestFilePathAsParameterColon()
         {
-            IReadArgs argsReader = new ArgsReader(ArgumentList.Instance) { IgnoreUnknownParams = true };
+            var listName = "FileColon";
+            ArgumentMessageBuilder.Instance.ExeName = "test.exe";
+            var argsList = new ArgumentList(listName) { MessageBuilder = new FakeMessageBuilder() };
+            var argsHandlerList = new ArgsHandlerList(argsList.Args);
+            IReadArgs argsReader = new ArgsReader(argsHandlerList, argsList.Message);
+            new ArgsManager<ArgsHandler>(argsReader, argsList, argsHandlerList);
             argsReader.ParseArgs(new[] { @"File:""C:\some\Awesome\File.txt""" });
             const string expected = @"C:\some\Awesome\File.txt";
-            Assert.AreEqual(expected, Args.Value("File"));
+            Assert.AreEqual(expected, Args.Value("File", listName));
         }
 
         [TestMethod]
         public void TestEqualSignInParameter()
         {
-            IReadArgs argsReader = new ArgsReader(ArgumentList.Instance) { IgnoreUnknownParams = true };
-            argsReader.ParseArgs(new[] { @"Param=""a=b""" });
+            // Arrange
+            ArgumentMessageBuilder.Instance.ExeName = "test.exe";
+            var listName = "EqualsSignInValue";
+            var argsList = new ArgumentList(listName) { MessageBuilder = new FakeMessageBuilder() };
+            var argsHandlerList = new ArgsHandlerList(argsList.Args);
+            IReadArgs argsReader = new ArgsReader(argsHandlerList, argsList.Message);
+            new ArgsManager<ArgsHandler>(argsReader, argsList, argsHandlerList);
             const string expected = "a=b";
-            Assert.AreEqual(expected, Args.Value("Param"));
+
+            // Act
+            argsReader.ParseArgs(new[] { @"Param=""a=b""" });
+            
+            // Assert
+            Assert.AreEqual(expected, Args.Value("Param", listName));
         }
     }
 }

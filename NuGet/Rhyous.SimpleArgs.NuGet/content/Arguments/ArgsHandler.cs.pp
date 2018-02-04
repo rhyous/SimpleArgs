@@ -6,7 +6,7 @@ namespace $rootnamespace$.Arguments
 {
     // Add this line of code to Main() in Program.cs
     //
-    //   ArgsManager.Instance.Start(new ArgsHandler(), args);
+    //   new ArgsManager<ArgsHandler>().Start(args);
     //
 
     /// <summary>
@@ -15,9 +15,9 @@ namespace $rootnamespace$.Arguments
     /// </summary>
     public sealed class ArgsHandler : ArgsHandlerBase
     {
-        public ArgsHandler()
+        public override void InitializeArguments(IArgsManager argsManager)
         {
-            Arguments = new List<Argument>
+            Arguments.AddRange(new List<Argument>
             {
                 new Argument
                 {
@@ -34,14 +34,24 @@ namespace $rootnamespace$.Arguments
                     Description = "This is an example argument with a default value.",
                     Example = "{name}=NonDefaultValue",
                     DefaultValue = "SomeDefaultValue"
-                }
+                },
                 // Add more args here
-            };
+				// new Argument
+                // {
+                //     Name = "NextArg",
+                //     ShortName = "N",
+                //     Description = "This is the next arg you are going to add.",
+                //     Example = "{name}=true",
+                //     DefaultValue = "false"
+                //     AllowedValues = CommonAllowedValues.TrueFalse
+                // },
+                new ConfigFileArgument(argsManager) // This is a special Argument type to allow for args in a file
+            });
         }
 
         public override void HandleArgs(IReadArgs inArgsHandler)
         {
-            Handled = true;
+            base.HandleArgs(inArgsHandler);
             Console.WriteLine("I handled the args!!!");
         }
     }

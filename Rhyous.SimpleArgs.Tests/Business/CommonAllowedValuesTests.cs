@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhyous.SimpleArgs;
-using SimpleArgs.Tests.Data;
-using SimpleArgs.Tests.MsTestHelpers;
+using Rhyous.SimpleArgs.Tests.Data;
+using Rhyous.SimpleArgs.Tests.MsTestHelpers;
 
-namespace SimpleArgs.Tests.Business
+namespace Rhyous.SimpleArgs.Tests.Business
 {
     [TestClass]
     public class CommonAllowedValuesTests

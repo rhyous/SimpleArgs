@@ -6,17 +6,17 @@ A project that makes it easier to add command line arguments to applications.
 1. Install the NuGet package. It adds the SimpleArgs dll and an ArgsHandler.cs file.
 
     ```
-    install-package SimpleArgs
+    install-package Rhyous.SimpleArgs
     // Or if you don't want a separate dll, install this:
-    install-package SimpleArgs.Sources
+    install-package Rhyous.SimpleArgs.Sources
     ```
 
-2. Add your new Arguments to the contructor of the ArgsHandler.cs file.
+2. Add your new Arguments to the InitializeArguments override of the ArgsHandler.cs file.
 
     ```
-    public ArgsHandler()
+    public override void InitializeArguments()
     {
-        Arguments = new List<Argument>
+        Arguments.AddRange(new List<Argument>
         {
             new Argument
             {
@@ -27,7 +27,7 @@ A project that makes it easier to add command line arguments to applications.
                 Action = (value) => { Console.WriteLine(value);}
             },
             // Add more args here
-        };
+        });
     }
     ```
 
@@ -36,7 +36,7 @@ A project that makes it easier to add command line arguments to applications.
     ```
     static void Main(string[] args)
     {
-        ArgsManager.Instance.Start(new ArgsHandler(), args);
+        new ArgsManager<ArgsHandler>().Start(args);
     }
     ```
 
@@ -45,7 +45,7 @@ A project that makes it easier to add command line arguments to applications.
     ```
     public void HandleArgs(IReadArgs inArgsHandler)
     {
-        Handled = true;
+        base.HandleArgs(inArgsHandler);
         Console.WriteLine("I handled the args!!!");
         // This is where you start your work now
     }

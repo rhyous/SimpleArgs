@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace SimpleArgs.Tests.MsTestHelpers
+namespace Rhyous.SimpleArgs.Tests.MsTestHelpers
 {
     public static class DataRowExtensions
     {

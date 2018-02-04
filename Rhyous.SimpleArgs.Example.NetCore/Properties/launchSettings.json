@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Rhyous.SimpleArgs.Example.NetCore": {
+      "commandName": "Project",
+      "commandLineArgs": "argsfile=args.cfg"
+    }
+  }
+}

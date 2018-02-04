@@ -1,4 +1,4 @@
-﻿namespace SimpleArgs.Tests.Data
+﻿namespace Rhyous.SimpleArgs.Tests.Data
 {
     public static class DataSources
     {

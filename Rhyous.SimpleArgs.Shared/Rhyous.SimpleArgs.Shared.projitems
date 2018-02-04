@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e8c2ffb3-4c1b-49b7-8a3d-6d98a2bbf1c8</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Rhyous.SimpleArgs.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Business\Args.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ArgsHandlerList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ArgsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ArgsReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ArgumentMessageBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ArgumentsHandlerBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\CommonAllowedValues.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ConfigParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\ExitManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\FileReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ArgumentExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DictionaryExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IArgsHandlerList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IArgsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IArgumentMessageBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IArgumentsHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IExitManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IFileOpener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IReadArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Argument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ArgumentAddedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ArgumentDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ArgumentList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ConfigFileArgument.cs" />
+  </ItemGroup>
+</Project>

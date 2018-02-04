@@ -6,8 +6,8 @@
     <ProjectGuid>{2FEC582F-92D7-4538-B917-D3B9D4DC688B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleArgs.Tests</RootNamespace>
-    <AssemblyName>SimpleArgs.Tests</AssemblyName>
+    <RootNamespace>Rhyous.SimpleArgs.Tests</RootNamespace>
+    <AssemblyName>Rhyous.SimpleArgs.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,14 +48,25 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Business\ArgsManagerTests.cs" />
+    <Compile Include="Model\ArgsHandler.cs" />
     <Compile Include="Business\CommonAllowedValuesTests.cs" />
     <Compile Include="Business\ArgsReaderTests.cs" />
+    <Compile Include="Business\ConfigParserTests.cs" />
     <Compile Include="Data\DataSources.cs" />
+    <Compile Include="Model\ArgsHandlerConfig.cs" />
+    <Compile Include="Model\ArgsHandler1.cs" />
+    <Compile Include="EndToEndTests\EndToEndConfig.cs" />
+    <Compile Include="EndToEndTests\EndToEnd1.cs" />
+    <Compile Include="Model\TestValues.cs" />
+    <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Model\ArgumentActionCalledTests.cs" />
     <Compile Include="MsTestHelpers\DataRowExtensions.cs" />
@@ -65,9 +76,9 @@
     <Compile Include="Model\ArgumentAllowedValueTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rhyous.SimpleArgs\Rhyous.SimpleArgs.csproj">
+    <ProjectReference Include="..\Rhyous.SimpleArgs.Net40Client\Rhyous.SimpleArgs.Net40Client.csproj">
       <Project>{280fd5fb-c77c-48ac-bfb1-39964df61775}</Project>
-      <Name>Rhyous.SimpleArgs</Name>
+      <Name>Rhyous.SimpleArgs.Net40Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

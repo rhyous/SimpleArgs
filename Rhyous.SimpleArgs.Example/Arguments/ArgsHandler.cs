@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Rhyous.SimpleArgs;
+using System;
+using System.Collections.Generic;
 
 namespace SimpleArgs.Example.Arguments
 {
+    // Add this line of code to Main() in Program.cs
+    //
+    //   new ArgsManager<ArgsHandler>().Start(args);
+    //
+
     /// <summary>
     /// A class that implements IArgumentsHandler where command line
     /// arguments are defined.
     /// </summary>
     public sealed class ArgsHandler : ArgsHandlerBase
     {
-        public ArgsHandler()
+        public override void InitializeArguments(IArgsManager argsManager)
         {
-            Arguments = new List<Argument>
+            Arguments.AddRange(new List<Argument>
             {
                 new Argument
                 {
@@ -21,15 +25,7 @@ namespace SimpleArgs.Example.Arguments
                     ShortName = "E",
                     Description = "I echo to the console whater you put after Echo=",
                     Example = "{name}=\"Hello, World!\"",
-                    Action = value => { Console.WriteLine(value);}
-                },
-                new Argument
-                {
-                    Name = "ReverseEcho",
-                    ShortName = "RE",
-                    Description = "I echo to the console whater you put after Echo= but I do it in reverse",
-                    Example = "{name}=\"Hello, World!\"",
-                    Action = value => { Console.WriteLine(value.Reverse());}
+                    Action = (value) => { Console.WriteLine(value); }
                 },
                 new Argument
                 {
@@ -39,31 +35,24 @@ namespace SimpleArgs.Example.Arguments
                     Example = "{name}=NonDefaultValue",
                     DefaultValue = "SomeDefaultValue"
                 },
-                new Argument
-                {
-                    Name = "ExampleBool",
-                    ShortName = "eb",
-                    Description = "This is an example of a true/false parameter.",
-                    Example = "{name}=true",
-                    DefaultValue = "false",
-                    AllowedValues = CommonAllowedValues.TrueFalse
-                }
-            };
-        }
-
-        public override int MinimumRequiredArgs
-        {
-            get { return 1; } // At least one argument is required
+                // Add more args here
+				// new Argument
+                // {
+                //     Name = "NextArg",
+                //     ShortName = "N",
+                //     Description = "This is the next arg you are going to add.",
+                //     Example = "{name}=true",
+                //     DefaultValue = "false"
+                //     AllowedValues = CommonAllowedValues.TrueFalse
+                // },
+                new ConfigFileArgument(argsManager) // This is a special Argument type to allow for args in a file
+            });
         }
 
         public override void HandleArgs(IReadArgs inArgsHandler)
         {
             base.HandleArgs(inArgsHandler);
             Console.WriteLine("I handled the args!!!");
-            if (Args.Value("Value") == Args.Get("Value").DefaultValue)
-                Console.WriteLine("You left the default value of {0}", Args.Value("Value"));
-            else
-                Console.WriteLine("You changed the default value to {0}", Args.Value("Value"));
         }
     }
 }

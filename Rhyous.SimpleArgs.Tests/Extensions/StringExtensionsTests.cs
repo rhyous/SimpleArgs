@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhyous.SimpleArgs;
-using SimpleArgs.Tests.Data;
-using SimpleArgs.Tests.MsTestHelpers;
+using Rhyous.SimpleArgs.Tests.Data;
+using Rhyous.SimpleArgs.Tests.MsTestHelpers;
 
-namespace SimpleArgs.Tests.Extensions
+namespace Rhyous.SimpleArgs.Tests.Extensions
 {
     [TestClass]
     public class StringExtensionsTests

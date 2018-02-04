@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhyous.SimpleArgs;
 
-namespace SimpleArgs.Tests.Model
+namespace Rhyous.SimpleArgs.Tests.Model
 {
     [TestClass]
     public class ArgumentActionCalledTests
