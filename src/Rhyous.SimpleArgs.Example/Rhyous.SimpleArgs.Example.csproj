@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <TargetFrameworks>net48</TargetFrameworks>
+      <OutputType>Exe</OutputType>
+    <AssemblyName>Rhyous.SimpleArgs.Example</AssemblyName>
+    <RootNamespace>Rhyous.SimpleArgs.Example</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rhyous.SimpleArgs\Rhyous.SimpleArgs.csproj" />
+  </ItemGroup>
+
+</Project>
