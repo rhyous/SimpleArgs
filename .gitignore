@@ -203,3 +203,4 @@ FakesAssemblies/
 /NuGet/Rhyous.SimpleArgs.Nuget.Sources/src/*
 
 [Aa]pp_[Ppackages]/
+/src/coverage

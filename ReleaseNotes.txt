@@ -1,3 +1,10 @@
+2.1.0
+- Build in GitHub Actions
+- Sign assembly
+
+2.0.1
+- A small amount of dependency injection support
+
 2.0.0
 - A simpler start-up command.
 - Removal of singletons

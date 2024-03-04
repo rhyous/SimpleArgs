@@ -1,0 +1,109 @@
+# This workflow was created by Jared Barneck (Rhyous).
+# Used for dotnet microlibraries that build and publish to NuGet
+name: CI - Main
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events (after pull request completes) but only for the "master" and "vNext" branches
+  push:
+    branches: [ "master", "vNext" ]
+    paths-ignore:
+      - '**.yml'
+      - '**.md'
+      - '**/docs/**'
+      - '**/.editorconfig'
+      - '**/.gitignore'
+      - '**/NuGet.Config'
+      - '**/*.Tests/**'
+      - '**/.editorconfig'
+      - '.gitignore'
+      - 'CODEOWNERS'
+      
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run: 
+        working-directory: src
+      
+    strategy:
+      matrix:
+        dotnet-version: [ '8.0.x' ]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      # Get dotnet setup and ready to work
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # restore nuget packages
+      - name: Restoring NuGet packages
+        run: dotnet restore
+        
+      # Get build number
+      - name: Get Build Number with base offset
+        uses: mlilback/build-number@v1
+        with:
+          base: -8
+          run-id: ${{github.run_number}}
+        
+      # Build - Main
+      - name: Build source
+        if: github.ref == 'refs/heads/master'
+        run: dotnet build --configuration Release --no-restore -p:AssemblyVersion=2.1.0 -p:FileVersion=2.1.${{env.BUILD_NUMBER}} -p:Version=2.1.${{env.BUILD_NUMBER}}
+
+      # Build - vNext
+      - name: Build source
+        if: github.ref == 'refs/heads/vNext'
+        run: dotnet build --configuration Release --no-restore -p:AssemblyVersion=2.2.0 -p:FileVersion=2.2.${{env.BUILD_NUMBER}} -p:Version=2.2.${{env.BUILD_NUMBER}} --version-suffix alpha
+        
+      # Run Unit Tests
+      # Add coverlet.collector nuget package to test project - 'dotnet add <TestProject.cspoj> package coverlet
+      - name: Run Tests
+        run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --logger trx --results-directory coverage --filter TestCategory!=SkipCI
+        
+      # Install ReportGenerator
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+        
+      # Run ReportGenerator
+      - name: Run ReportGenerator
+        run: reportgenerator -reports:./coverage/*/coverage.cobertura.xml -targetdir:coveragereport -reportType:Cobertura
+        
+      # Code Coverage
+      - name: Code Coverage Report
+        if: runner.os == 'Linux'
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: '**/Cobertura.xml'
+          badge: true
+          fail_below_min: true
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: true
+          indicators: true
+          output: both
+          thresholds: '60 65'
+
+      - name: Add Coverage PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: runner.os == 'Linux' && github.event_name == 'pull_request'
+        with:
+          recreate: true
+          path: code-coverage-results.md
+
+      # Publish NuGet
+      - name: Publish the NuGet package
+        if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master' }}
+        run: dotnet nuget push "**/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
